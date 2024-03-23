@@ -6,10 +6,16 @@ public class request {
     public request() {
         
     }
-    public void updateStatus(request request, String status){
+    public void updateStatus(String status){
 		this.status=status;
 	}
 	public String getStatus(request request){
 		return this.status;
+	}
+	public void setDateArrival(){
+
+	}
+	public void setDateRequested(String dateRequested){
+		this.dateRequested=dateRequested;
 	}
 } 

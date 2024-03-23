@@ -5,16 +5,16 @@ class studyroom {
 	public studyroom(){ //constructor
 
 	}
-	public void reserveStudyRoom(studyroom studyroom, int duration){
+	public void reserveStudyRoom(int duration){
 		
 	}
-	public void cancelReservation(studyroom studyroom){
-		
+	public void cancelReservation(){
+
 	}
-	public void updateStatus(studyroom studyroom, boolean status){
+	public void updateStatus(boolean status){
 		this.status=status;
 	}
-	public boolean getStatus(studyroom studyroom){
+	public boolean getStatus(){
 		return this.status;
 	}
 }
