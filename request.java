@@ -6,4 +6,10 @@ public class request {
     public request() {
         
     }
+    public void updateStatus(request request, String status){
+		this.status=status;
+	}
+	public String getStatus(request request){
+		return this.status;
+	}
 } 
