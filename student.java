@@ -5,5 +5,12 @@ public class student {
     public float fines;
     public request requests[];
     public book borrowedBooks[];
+    //methods
+    public void listRequests() {
+        for(int i = 0; i < requests.length; i++) {
+            System.out.println("Request " + i) + ": ";
+            System.out.println("Book: " + 
+        }
+    }
 
 }
