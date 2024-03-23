@@ -1,9 +1,8 @@
-public static class librarian{
-        final static String name;
-        final static String desc;
-        final static String email;
-        final static String phoneNum;
-        final static String subSpec;
-        final static String guides;
-  
+public class librarian{
+        private String name;
+        private String desc;
+        private String email;
+        private String phoneNum;
+        private String subSpec;
+        private String guides;
 }
