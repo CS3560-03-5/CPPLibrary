@@ -3,6 +3,7 @@ class student {
     private String name;
     private String email;
     private String[] borrowedBooks;
+    private int fines;
 
 
     // Constructor to initialize a new student
@@ -11,6 +12,7 @@ class student {
         this.name = name;
         this.email = email;
         this.borrowedBooks = new String[0];
+        this.fines = 0;
     }
 
     // Getters and Setters
@@ -25,4 +27,7 @@ class student {
 
     public String[] getBorrowedBooks() { return borrowedBooks; }
     public void setBorrowedBooks(String[] borrowedBooks) { this.borrowedBooks = borrowedBooks; }
+
+    public int setFines(){ return fines; }
+    public void getFines(int fines){ this.fines = fines; }
 }
