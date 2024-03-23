@@ -1,4 +1,4 @@
-public static class{
+public static class librarian{
         final static String name;
         final static String desc;
         final static String email;
