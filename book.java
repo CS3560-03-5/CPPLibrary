@@ -1,15 +1,19 @@
-public static class Book{
-	final static String title;
-	final static String author;
-	final static String datePublished;
-	final static String publisher;
-	final static String summary;
-	final static String type;
-	final static String location;
-	final static String language;
+public class book{
+	private String title;
+	private String author;
+	private String datePublished;
+	private String publisher;
+	private String summary;
+	private String type;
+	private String location;
+	private String language;
 	String condition;
-	final static String genre;
-	final static String subjects;
+	private String genre;
+	private String subjects;
 	int copies; 
+	//constructor
+	public book() {
+
+	}
 	//setters and getters needed
 }
