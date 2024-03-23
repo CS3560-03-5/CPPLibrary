@@ -2,12 +2,15 @@ class student {
     private String studentID;
     private String name;
     private String email;
+    private String[] borrowedBooks;
+
 
     // Constructor to initialize a new student
     public student(String studentID, String name, String email) {
         this.studentID = studentID;
         this.name = name;
         this.email = email;
+        this.borrowedBooks = new String[0];
     }
 
     // Getters and Setters
@@ -19,4 +22,7 @@ class student {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; } // setter for email
+
+    public String[] getBorrowedBooks() { return borrowedBooks; }
+    public void setBorrowedBooks(String[] borrowedBooks) { this.borrowedBooks = borrowedBooks; }
 }
