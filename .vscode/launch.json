@@ -9,8 +9,8 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "website",
-            "projectName": "CPPLibrary"
-            "vmArgs": "--module-path "c:\Users\faulc\Documents\cpp\spring2024\cs3560\openjfx-22.0.1_windows-x64_bin-sdk\javafx-sdk-22.0.1\lib" --add-modules javafx.controls,javafx.fxml"
+            "projectName": "CPPLibrary",
+            "vmArgs": "--module-path \"C:/Users/faulc/Documents/cpp/spring2024/cs3560/openjfx-22.0.1_windows-x64_bin-sdk/javafx-sdk-22.0.1/lib\" --add-modules javafx.controls,javafx.fxml"
         }
     ]
 }
