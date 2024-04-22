@@ -22,23 +22,9 @@ import javafx.stage.Stage;
 public class App extends Application{
     @Override
     public void start(Stage primaryStage) {
-           /* Button btn = new Button();
-            btn.setText("Say 'HelloWorld'");
-            btn.setOnAction(event -> {
-                
-                
-                System.out.println("Hello World!");
-                
-            });
-
-            StackPane root = new StackPane();
-            root.getChildren().add(btn);
-
-            Scene scene = new Scene(root, 300, 250);*/
+           
             BorderPane bp = new BorderPane();
             bp.setPadding(new Insets(20));
-            
-            
 
             //fitting borderpane to window
             Screen screen = Screen.getPrimary();
@@ -62,7 +48,7 @@ public class App extends Application{
             VBox homeBox = new VBox(home);
             homeBox.setAlignment(Pos.CENTER_RIGHT);
             homeBox.setPadding(new Insets(0, 100, 0, 0));
-
+            
             
             Label books = new Label("Books");
            
