@@ -14,35 +14,35 @@ import javafx.stage.Stage;
 
 public class FrontPage extends Application {
     
-    static MenuButton studentOptions = new MenuButton("Students");
-    static MenuItem borrowedBooks = new MenuItem("Borrowed Books");
-    static MenuItem fees = new MenuItem("Fees");
-    static MenuItem requests = new MenuItem("Requests");
-    static MenuItem logIn = new MenuItem("Log In");
+    public static MenuButton studentOptions = new MenuButton("Students");
+    public static MenuItem borrowedBooks = new MenuItem("Borrowed Books");
+    public static MenuItem fees = new MenuItem("Fees");
+    public static MenuItem requests = new MenuItem("Requests");
+    public static MenuItem logIn = new MenuItem("Log In");
     
-    static VBox studentOptionsBox = new VBox(studentOptions);
+    public static VBox studentOptionsBox = new VBox(studentOptions);
 
-    static Label home = new Label("Home");
-    static VBox homeBox = new VBox(home);
+    public static Label home = new Label("Home");
+    public static VBox homeBox = new VBox(home);
 
-    static Label books = new Label("Books");
+    public static Label books = new Label("Books");
     
-    static MenuButton librarian = new MenuButton("Librarians");
-    static MenuItem chat = new MenuItem("24/7 Chat");
-    static MenuItem guides = new MenuItem("Guides");
+    public static MenuButton librarian = new MenuButton("Librarians");
+    public static MenuItem chat = new MenuItem("24/7 Chat");
+    public static MenuItem guides = new MenuItem("Guides");
 
-    static Label studyRooms = new Label("StudyRooms");
+    public static Label studyRooms = new Label("StudyRooms");
 
-    static HBox middleOptions = new HBox(books, librarian, studyRooms);
+    public static HBox middleOptions = new HBox(books, librarian, studyRooms);
 
     public static HBox topOfPane = new HBox(homeBox, middleOptions, studentOptionsBox);
 
-    static Label searchPrompt = new Label("Search");
-    static TextField searchField = new TextField("Enter a Book, Author, or Publisher");
-    static HBox search = new HBox(searchPrompt, searchField);
+    public static Label searchPrompt = new Label("Search");
+    public static TextField searchField = new TextField("Enter a Book, Author, or Publisher");
+    public static HBox search = new HBox(searchPrompt, searchField);
 
-    static Button libraryChat = new Button("Chat with a Librarian");
-    static Button studyRoom = new Button("Reserve a Study Room");
+    public static Button libraryChat = new Button("Chat with a Librarian");
+    public static Button studyRoom = new Button("Reserve a Study Room");
 
     public static VBox frontPage = new VBox(search, libraryChat, studyRoom);
 
@@ -67,7 +67,6 @@ public class FrontPage extends Application {
 
         frontPage.setSpacing(50); //spacing between front page elements
         frontPage.setPadding(new Insets(75,0,0,0)); // spacing on top of frontpage (away from bp's top)
-        //frontPage.setAlignment(Pos.CENTER);
         frontPage.setAlignment(Pos.TOP_CENTER);
         
     }
