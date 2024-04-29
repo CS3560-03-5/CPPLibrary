@@ -51,9 +51,9 @@ CREATE TABLE requestedBooks (
 );
 
 -- Inserting values into students table (Sample)
-INSERT INTO students (student_id, student_name, bronco_id, student_major, student_email)
+INSERT INTO students (student_id, student_name, bronco_id, student_major, student_email, password)
 VALUES 
-    (1, 'Brandon Chang', '015817191', 'Computer Science', 'bkchang@cpp.edu');
+    (1, 'Brandon Chang', '015817191', 'Computer Science', 'bkchang@cpp.edu', 'admin');
   
 -- Inserting values into students table (Sample)
 INSERT INTO books (book_id, title, author, publication_date, ISBN, available_copies, subject)
