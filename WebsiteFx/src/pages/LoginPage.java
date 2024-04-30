@@ -13,7 +13,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginPage {
-    public static Label title = new Label("Cal Poly Pomona Library");
-    public static Label usernamePrompt = new Label("Username:");
-    public static Label passwordPrmpt = new Label("Password:");
+	public static Label title = new Label("Cal Poly Pomona Library");
+	public static Label usernamePrompt = new Label("Username:");
+	public static Label passwordPrmpt = new Label("Password:");
+
+	s.setTitle("Login Page");
+
+	Textfield u=new Textfield();
+	Textfield p=new Textfield();
+
+	Button login=new Button();
+	button.setText("login");
+	button.setTranslateX(333);
+	button.setTranslateY(254);
 }
