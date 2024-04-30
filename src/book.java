@@ -3,6 +3,7 @@ class book {
 	private String author;
 	private String ISBN;
 	private boolean isAvailable;
+	private int quantity;
     
 	// Constructor to initialize a new book
 	public book(String title, String author, String ISBN) {
@@ -29,4 +30,3 @@ class book {
 		isAvailable = available; 
 	}
 }
-    
