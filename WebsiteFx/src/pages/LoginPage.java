@@ -26,5 +26,4 @@ public class LoginPage {
 	button.setText("login");
 	button.setTranslateX(333);
 	button.setTranslateY(254);
-	login.setOnAction
 }
