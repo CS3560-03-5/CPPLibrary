@@ -8,9 +8,10 @@ class studyRoom {
 	    this.isReserved = false; // Rooms are available by default
 	}
     
-    public String getRoomNumber() { return roomNumber; }
+    public String getRoomNumber() { return this.roomNumber; }
     public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public boolean isReserved() { return isReserved; }
-    public void setReserved(boolean reserved) { isReserved = reserved; } 
+    public boolean getIsReserved() { return this.isReserved; }
+    public void reserve() { this.isReserved = true; }
+	public void available() { this.isReserved = false; }
 }
