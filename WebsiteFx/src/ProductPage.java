@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 public class ProductPage {
 
-    public static Label = 
+    public static Label back = new Label(""
     public static ImageView productImage = new ImageView(new Image("dune.jpg"));
     public static Label Title = new Label("Dune");
     public static Label Author = new Label("Frank Frank Herbert");
