@@ -1,0 +1,17 @@
+.rectangle {
+    /*-fx-fill: red;*/
+    /*-fx-fill: #28B463;*/
+    fill: green;
+    
+    /*-fx-fill: rgb(36, 104, 66);
+    -fx-background-color: rgb(36, 104, 66);
+    -fx-background-color: #28B463*/
+    /*-fx-color: red;
+    -fx-accent: red;
+    -fx-stroke: red;*/
+    
+}
+.grid-pane > * {
+    fill: #28B463;
+    background-color: #28B463;
+}

@@ -44,6 +44,7 @@ public class BooksPage extends Application {
     public static VBox booksPage = new VBox(new Separator(Orientation.HORIZONTAL));
 
     
+    
     public static void settings1(Stage primaryStage) {
 
         book1_img.setFitHeight(100); book1_img.setPreserveRatio(true);
