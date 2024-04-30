@@ -110,6 +110,7 @@ public class App extends Application{
                     });
                 }
             }
+
             int highlightNodes = 0;
             for(Node n: StudyRoomsPage.blockTable.getChildren()) {
                 if(GridPane.getRowIndex(n) > 0 && GridPane.getRowIndex(n) < StudyRoomsPage.roomsBox.getChildren().size() && GridPane.getColumnIndex(n) < StudyRoomsPage.blockTimes.length ) {
@@ -138,6 +139,21 @@ public class App extends Application{
                     });
                 }
             }
+
+            for(HBox h: BooksPage.options) {
+                h.setOnMouseEntered(e -> {
+                    h.setStyle("-fx-background: red");
+                    
+                });
+            }
+            
+            for(HBox h: BooksPage.options) {
+                h.setOnMouseClicked(e -> {
+                    bp.setCenter(FrontPage.frontPage);
+                    
+                });
+            }
+            
             
     }
     public static void main(String[] args) {
