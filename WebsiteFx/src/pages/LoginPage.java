@@ -4,8 +4,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -17,13 +19,18 @@ public class LoginPage {
 	public static Label usernamePrompt = new Label("Username:");
 	public static Label passwordPrmpt = new Label("Password:");
 
-	s.setTitle("Login Page");
+	
 
-	Textfield u=new Textfield();
-	Textfield p=new Textfield();
+	public static TextField u =new TextField();
+	public static TextField p =new TextField();
 
-	Button login=new Button();
-	button.setText("login");
-	button.setTranslateX(333);
-	button.setTranslateY(254);
+	public static Button login=new Button();
+	
+
+	public static void settings(Stage primaryStage) {
+		//s.setTitle("Login Page");
+		login.setText("login");
+		login.setTranslateX(333);
+		login.setTranslateY(254);
+	}
 }
