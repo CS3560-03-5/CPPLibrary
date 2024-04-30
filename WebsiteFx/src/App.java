@@ -11,96 +11,60 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.geometry.Orientation;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import pages.BooksPage;
+import pages.FrontPage;
 
 public class App extends Application{
     @Override
     public void start(Stage primaryStage) {
-           /* Button btn = new Button();
-            btn.setText("Say 'HelloWorld'");
-            btn.setOnAction(event -> {
-                
-                
-                System.out.println("Hello World!");
-                
-            });
-
-            StackPane root = new StackPane();
-            root.getChildren().add(btn);
-
-            Scene scene = new Scene(root, 300, 250);*/
+           
             BorderPane bp = new BorderPane();
             bp.setPadding(new Insets(20));
-            
-            
 
             //fitting borderpane to window
-            Screen screen = Screen.getPrimary();
+            /*Screen screen = Screen.getPrimary();
             Rectangle2D bounds = screen.getVisualBounds();
-            bp.setMaxWidth(bounds.getMinX());
-            bp.setMaxHeight(bounds.getMinY());
+            bp.setMaxWidth(bounds.getMaxX());
+            bp.setMaxHeight(bounds.getMaxY());*/
            
-            //menu items
-            MenuButton studentOptions = new MenuButton("Students");
-            MenuItem borrowedBooks = new MenuItem("Borrowed Books");
-            MenuItem fees = new MenuItem("Fees");
-            MenuItem requests = new MenuItem("Requests");
-            MenuItem logIn = new MenuItem("Log In");
-            
-            studentOptions.getItems().addAll(borrowedBooks, requests, fees, logIn);
+            //opens website on Front Page by default 
+            bp.setTop(FrontPage.topOfPane);
+            bp.setCenter(FrontPage.frontPage);
 
-            VBox studentOptionsBox = new VBox(studentOptions);
-            studentOptionsBox.setPadding(new Insets(0, 0, 0, 100));
+            //Populates the pages with content
+            FrontPage.settings(primaryStage);
+            BooksPage.settings1(primaryStage);
 
-            Label home = new Label("Home");
-            VBox homeBox = new VBox(home);
-            homeBox.setAlignment(Pos.CENTER_RIGHT);
-            homeBox.setPadding(new Insets(0, 100, 0, 0));
-
-            
-            Label books = new Label("Books");
-           
-            MenuButton librarian = new MenuButton("Librarians");
-            MenuItem chat = new MenuItem("24/7 Chat");
-            MenuItem guides = new MenuItem("Guides");
-            librarian.getItems().addAll(chat, guides);
-
-            Label studyRooms = new Label("StudyRooms");
-
-            HBox middleOptions = new HBox(books, librarian, studyRooms);
-            middleOptions.setSpacing(50);
-           
-
-            HBox topOfPane = new HBox(homeBox, middleOptions, studentOptionsBox);
-            topOfPane.setAlignment(Pos.CENTER);
-           
-            bp.setTop(topOfPane);
-
-            Label searchPrompt = new Label("Search");
-            TextField searchField = new TextField("Enter a Book, Author, or Publisher");
-            HBox search = new HBox(searchPrompt, searchField);
-            search.setSpacing(10);
-            search.setAlignment(Pos.CENTER);
-
-            Button libraryChat = new Button("Chat with a Librarian");
-            Button studyRoom = new Button("Reserve a Study Room");
-            
-            VBox frontPage = new VBox(search, libraryChat, studyRoom);
-            frontPage.setSpacing(50);
-            frontPage.setPadding(new Insets(0,0,0,0));
-            frontPage.setAlignment(Pos.CENTER);
-
-            bp.setCenter(frontPage);
+        
+            ScrollPane sp = new ScrollPane();
+            sp.setContent(bp);
+            sp.setFitToWidth(true);
+            sp.setFitToHeight(true);
 
             primaryStage.setTitle("CPP Library");
-            primaryStage.setScene(new Scene(bp));
+            primaryStage.setScene(new Scene(sp));
+            primaryStage.setMaximized(true);
             primaryStage.show();
+
+            
+            FrontPage.books.setOnMouseClicked(event -> {
+                bp.setCenter(BooksPage.booksPage);
+            } );
+            FrontPage.home.setOnMouseClicked( event -> {
+                bp.setCenter(FrontPage.frontPage);
+            });
 
     }
     public static void main(String[] args) {
