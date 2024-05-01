@@ -46,7 +46,7 @@ public class StudyRoomsPage {
 
 
     
-    public static String url = "root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
+    public static String url = "jdbc:mysql://127.0.0.1:3306/?user=root";//"root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
     public static String user = "root";
     public static String pwd = "root";
    
@@ -154,7 +154,7 @@ public class StudyRoomsPage {
 
         
         try  {
-            //Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection c = DriverManager.getConnection(url, user, pwd);
             String sql = "select availability_slots.*, studyroom.*"
                         +"from availability_slots"
@@ -173,7 +173,9 @@ public class StudyRoomsPage {
             c.close();
         }catch (SQLException e) {
             e.printStackTrace();
-            } /*catch (ClassNotFoundException e) {
+        } catch (Exception e) {
+            System.out.println(e);
+        }/*catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }*/

@@ -36,6 +36,7 @@ import javafx.stage.Stage;
 import pages.BooksPage;
 import pages.FrontPage;
 import pages.StudyRoomsPage;
+import pages.LoginPage;
 
 public class App extends Application{
     @Override
@@ -58,6 +59,7 @@ public class App extends Application{
             FrontPage.settings(primaryStage);
             BooksPage.settings1(primaryStage);
             StudyRoomsPage.settings(primaryStage);
+            LoginPage.settings(primaryStage);
     
             ScrollPane sp = new ScrollPane();
             sp.setContent(bp);
@@ -85,6 +87,9 @@ public class App extends Application{
             FrontPage.studyRoom.setOnMouseClicked(event -> {
                 bp.setCenter(StudyRoomsPage.studyRoomsPage);
                 w.getRoot().applyCss();
+            });
+            FrontPage.logIn.setOnAction(event -> {
+                bp.setCenter(LoginPage.loginBox);
             });
 
             
@@ -161,6 +166,7 @@ public class App extends Application{
                     
                 });
             }
+            
             
             
     }
