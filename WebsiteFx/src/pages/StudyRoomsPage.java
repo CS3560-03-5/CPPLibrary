@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
+
 public class StudyRoomsPage {
     
     public static Label blockPrompt = new Label(" Select the length (# of hours) for the Reservation Block");

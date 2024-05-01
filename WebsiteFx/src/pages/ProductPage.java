@@ -1,3 +1,4 @@
+package pages;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -6,7 +7,7 @@ import javafx.stage.Stage;
 
 public class ProductPage {
 
-    public static Label back = new Label(""
+    public static Label back = new Label("< Go back to Books");
     public static ImageView productImage = new ImageView(new Image("dune.jpg"));
     public static Label Title = new Label("Dune");
     public static Label Author = new Label("Frank Frank Herbert");
