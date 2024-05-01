@@ -24,9 +24,17 @@ CREATE TABLE studyRoom (
     studyRoom_id INT PRIMARY KEY,
     studyRoom_Number INT,
     studyRoom_Floor INT,
-    availability VARCHAR(255),
+    --availability VARCHAR(255),
     bronco_id_booked_by VARCHAR(255),
     capacity INT
+);
+
+CREATE TABLE availability_slots (
+    slot_id INT PRIMARY KEY AUTO_INCREMENT,
+    studyRoom_id INT,
+    start_time VARCHAR(255),
+    is_available BOOLEAN,
+    FOREIGN KEY (studyRoom_id) REFERENCES studyRoom(studyRoom_id)
 );
 
 -- Creating a table for librarian
@@ -64,3 +72,34 @@ VALUES
 INSERT INTO studyRoom (studyRoom_id, studyRoom_Number, studyRoom_Floor, availability, capacity)
 VALUES 
     (2, 2436, 2, 'Available', 3);
+
+-- Inserting into availability_slots
+
+INSERT INTO availability_slots (start_time, is_available)
+VALUES
+    ("10:30am", TRUE),
+    ("11:00am", TRUE),
+    ("11:30am", TRUE),
+    ("12:00am", TRUE),
+    ("12:30am", TRUE),
+    ("1:00pm", TRUE),
+    ("1:30pm", TRUE),
+    ("2:00pm", TRUE),
+    ("2:30pm", TRUE),
+    ("3:00pm", TRUE),
+    ("3:30pm", TRUE),
+    ("4:00pm", TRUE),
+    ("4:30pm", TRUE),
+    ("5:00apm", TRUE),
+    ("5:30pm", TRUE),
+    ("6:00pm", TRUE),
+    ("6:30pm", TRUE),
+    ("7:00pm", TRUE),
+    ("7:30pm", TRUE),
+    ("8:00pm", TRUE),
+    ("8:30pm", TRUE),
+    ("9:00pm", TRUE),
+    ("9:30pm", TRUE),
+    ("10:00pm", TRUE),
+    ("10:30pm", TRUE),
+

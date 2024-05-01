@@ -22,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -142,7 +144,13 @@ public class App extends Application{
 
             for(HBox h: BooksPage.options) {
                 h.setOnMouseEntered(e -> {
-                    h.setStyle("-fx-background: red");
+                    h.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, null, null)));
+                    
+                });
+            }
+            for(HBox h: BooksPage.options) {
+                h.setOnMouseExited(e -> {
+                    h.setBackground(new Background(new BackgroundFill(null, null, null)));
                     
                 });
             }
