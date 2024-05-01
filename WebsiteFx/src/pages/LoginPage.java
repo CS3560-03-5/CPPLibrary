@@ -26,7 +26,7 @@ public class LoginPage {
 
 	public static Button login=new Button();
 	
-
+	public static VBox loginBox = new VBox();
 	public static void settings(Stage primaryStage) {
 		//s.setTitle("Login Page");
 		login.setText("login");
