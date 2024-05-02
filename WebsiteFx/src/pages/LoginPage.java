@@ -51,3 +51,16 @@ public class LoginPage {
 		loginBox.getChildren().addAll(title, user, pass, login);
 	}
 }
+/*
+ * Scanner scan=new Scanner(System.in);
+Connection con=database.getConnection(“databaseFilePath”, “student_email”, “password”);
+String usernameInput=getInputFromTextField;
+String usernameCheck=”SELECT * FROM students WHERE usernameInput=””+usernameinput+””;
+Statement isFound=con.createStatement();
+ResultSet result=isFound.executeQuery(usernameCheck);
+if(isFound.next()){
+	//login
+	Else
+	//page saying the user must enroll first
+}
+ */
