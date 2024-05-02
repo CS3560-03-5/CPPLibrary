@@ -33,20 +33,7 @@ public class LoginPage {
 	
 	public static VBox loginBox = new VBox();
 	public static void settings(Stage primaryStage) {
-		//s.setTitle("Login Page");
-		/*login.setText("login");
-		login.setTranslateX(333);
-		login.setTranslateY(254);
-		u.setTranslateX(196);
-		u.setTranslateY(167);
-		p.setTranslateX(196);
-		p.setTranslateY(212);
-		usernamePrompt.setTranslateX(122);
-		usernamePrompt.setTranslateY(171);
-		passwordPrompt.setTranslateX(122);
-		passwordPrompt.setTranslateY(208);
-		title.setTranslateX(178);
-		title.setTranslateY(59);*/
+		
 
 		loginBox.getChildren().addAll(title, user, pass, login);
 	}
