@@ -1,6 +1,11 @@
 //import java.beans.EventHandler;
 //import java.util.EventListener;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javafx.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -73,9 +78,34 @@ public class App extends Application{
             primaryStage.setMaximized(true);
             primaryStage.show();
 
+
+            String url = "jdbc:mysql://127.0.0.1:3306/?user=root";//"root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
+            String user = "root";
+            String pwd = "root";
+           
             LoginPage.login.setOnAction( event -> {
                 System.out.println(LoginPage.e.getText());
                 System.out.println(LoginPage.p.getText());
+                
+                try{
+			        Connection c = DriverManager.getConnection(url, user, pwd);
+                
+                    
+                    String query = "SELECT *"
+                                    +"FROM users"
+                                    +"WHERE broncoID =" + LoginPage.emailInput + " AND password = " + LoginPage.passInput + ";";
+                    Statement isFound= c.createStatement();
+                    ResultSet result= isFound.executeQuery(query);
+
+                    if(result.next()){
+                        //login
+                        System.out.println("Match");
+                        //page saying the user must enroll first
+                    }
+                }catch(Exception e){
+                    System.out.println("ERROR: "+e.getMessage());
+                }
+
                 bp.setTop(FrontPage.topOfPane);
                 bp.setCenter(FrontPage.frontPage);
 

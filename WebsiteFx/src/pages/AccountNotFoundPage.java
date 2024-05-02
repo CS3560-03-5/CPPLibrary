@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 public class AccountNotFoundPage {
 	public static VBox messageBox = new VBox();
 	public static Label message = new Label("This account does not exist.");
+	
 	public static void settings(Stage primaryStage) {
 		messageBox.getChildren().addAll(message);
 	}

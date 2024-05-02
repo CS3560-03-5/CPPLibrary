@@ -1,5 +1,10 @@
 package pages;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -35,6 +40,10 @@ public class LoginPage {
 
 	public static String emailInput;
 	public static String passInput;
+
+	public static String url = "jdbc:mysql://127.0.0.1:3306/?user=root";//"root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
+    public static String user = "root";
+    public static String pwd = "root";
 	
 	public static void settings(Stage primaryStage) {
 		
@@ -48,22 +57,30 @@ public class LoginPage {
 		loginBox.getChildren().addAll(title, email, pass, login);
 		loginBox.setAlignment(Pos.CENTER);
 		loginBox.setSpacing(20);
+
+
+		
+		/* try{
+			Connection c = DriverManager.getConnection(url, user, pwd);
+		
+			
+			String query = "SELECT *"
+							+"FROM users"
+							+"WHERE broncoID =" + emailInput + " AND password = " + passInput + ";";
+			Statement isFound= c.createStatement();
+			ResultSet result= isFound.executeQuery(query);
+
+		if(result.next()){
+			//login
+			System.out.println("Match");
+			//page saying the user must enroll first
+		}
+		}catch(Exception e){
+			System.out.println("ERROR: "+e.getMessage());
+		} */
+
+
 	}
 }
-/*
- * Scanner scan=new Scanner(System.in);
- * try{
-Connection con=database.getConnection(“databaseFilePath”, “student_email”, “password”);
-String emailInput=getInputFromTextField;
-String emailCheck=”SELECT * FROM students WHERE emailInput=””+usernameinput+””;
-Statement isFound=con.createStatement();
-ResultSet result=isFound.executeQuery(emailCheck);
-if(isFound.next()){
-	//login
-	Else
-	//page saying the user must enroll first
-}
-}catch(Exception e){
-	System.out.println("ERROR: "+e.getMessage());
-}
- */
+
+  
