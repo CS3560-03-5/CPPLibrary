@@ -74,8 +74,11 @@ public class App extends Application{
             primaryStage.show();
 
             LoginPage.login.setOnAction( event -> {
+                System.out.println(LoginPage.e.getText());
+                System.out.println(LoginPage.p.getText());
                 bp.setTop(FrontPage.topOfPane);
                 bp.setCenter(FrontPage.frontPage);
+
             });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
