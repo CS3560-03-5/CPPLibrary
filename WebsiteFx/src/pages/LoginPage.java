@@ -34,13 +34,21 @@ public class LoginPage {
 	
 	public static VBox loginBox = new VBox();
 
+	public static String userInput;
+	public static String passInput;
+	
 	public static void settings(Stage primaryStage) {
 		
 		user.setAlignment(Pos.CENTER);
+		user.setSpacing(20);
+		
 		pass.setAlignment(Pos.CENTER);
+		pass.setSpacing(20);
+
 		login.setAlignment(Pos.CENTER);
 		loginBox.getChildren().addAll(title, user, pass, login);
 		loginBox.setAlignment(Pos.CENTER);
+		loginBox.setSpacing(20);
 	}
 }
 /*
