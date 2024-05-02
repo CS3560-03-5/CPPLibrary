@@ -12,6 +12,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
 public class BooksPage extends Application {
     int n = 12;//placeholder number of books
     
@@ -46,6 +53,16 @@ public class BooksPage extends Application {
     
     
     public static void settings1(Stage primaryStage) {
+        
+        /*String url = "root:root://localhost:3306/CPP_Library";
+        String user = "root";
+        String pwd = "root";
+
+        try {
+            Connection conn = DriverManager.getConnection(url, user, pwd);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.execute
+        }*/
 
         book1_img.setFitHeight(100); book1_img.setPreserveRatio(true);
         book2_img.setFitHeight(100); book2_img.setPreserveRatio(true);
@@ -54,12 +71,12 @@ public class BooksPage extends Application {
         book5_img.setFitHeight(100); book5_img.setPreserveRatio(true);
         book6_img.setFitHeight(100); book6_img.setPreserveRatio(true);
 
-        option1.setSpacing(20);
-        option2.setSpacing(20);
-        option3.setSpacing(20);
-        option4.setSpacing(20);
-        option5.setSpacing(20);
-        option6.setSpacing(20);
+        option1.setSpacing(20); option1.setPadding(new Insets(20,0,20,20));
+        option2.setSpacing(20); option2.setPadding(new Insets(20,0,20,20));
+        option3.setSpacing(20); option3.setPadding(new Insets(20,0,20,20));
+        option4.setSpacing(20); option4.setPadding(new Insets(20,0,20,20));
+        option5.setSpacing(20); option5.setPadding(new Insets(20,0,20,20));
+        option6.setSpacing(20); option6.setPadding(new Insets(20,0,20,20));
 
       for (HBox v : options) {
                     booksPage.getChildren().add(v);

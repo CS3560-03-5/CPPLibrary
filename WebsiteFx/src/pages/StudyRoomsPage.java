@@ -16,6 +16,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class StudyRoomsPage {
     
@@ -32,6 +37,24 @@ public class StudyRoomsPage {
     public static HBox reservedExample = new HBox(red, new Label("Reserved"));
     public static VBox colorDemo = new VBox(availableExample, reservedExample);
 
+
+
+
+
+
+
+
+
+    
+    public static String url = "jdbc:mysql://127.0.0.1:3306/?user=root";//"root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
+    public static String user = "root";
+    public static String pwd = "root";
+   
+
+        
+
+    
+    
     public static Label[] rooms = {new Label("2nd Floor"), new Label("201"), new Label("202"),
                                     new Label("3rd Floor"), new Label("301"), new Label("302"),
                                     new Label("4th Floor"), new Label("401"), new Label("402")};
@@ -130,7 +153,32 @@ public class StudyRoomsPage {
 
 
         
+        try  {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection c = DriverManager.getConnection(url, user, pwd);
+            String sql = "select availability_slots.*, studyroom.*"
+                        +"from availability_slots"
+                        +"join  studyroom on studyroom.studyRoom_id = availability_slots.studyRoom_id;";
+            PreparedStatement ps = c.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
 
+            while( resultSet.next()) {
+                String studyRoom = resultSet.getString("studyRoom_Number");
+                String timeslot = resultSet.getString("start_time");
+                Boolean available = resultSet.getBoolean("is_available");
+                System.out.println("Room #: "+studyRoom+", Timeslot: "+timeslot+", Available?: "+available);
+            } 
+            resultSet.close();
+            ps.close();
+            c.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e);
+        }/*catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }*/
 
 
         

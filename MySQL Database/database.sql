@@ -24,9 +24,17 @@ CREATE TABLE studyRoom (
     studyRoom_id INT PRIMARY KEY,
     studyRoom_Number INT,
     studyRoom_Floor INT,
-    availability VARCHAR(255),
+    --availability VARCHAR(255),
     bronco_id_booked_by VARCHAR(255),
     capacity INT
+);
+
+CREATE TABLE availability_slots (
+    slot_id INT PRIMARY KEY AUTO_INCREMENT,
+    studyRoom_id INT,
+    start_time VARCHAR(255),
+    is_available BOOLEAN,
+    FOREIGN KEY (studyRoom_id) REFERENCES studyRoom(studyRoom_id)
 );
 
 -- Creating a table for librarian
@@ -64,3 +72,76 @@ VALUES
 INSERT INTO studyRoom (studyRoom_id, studyRoom_Number, studyRoom_Floor, availability, capacity)
 VALUES 
     (2, 2436, 2, 'Available', 3);
+
+NSERT INTO studyRoom (studyRoom_id, studyRoom_Number, studyRoom_Floor, availability, capacity)
+VALUES 
+    (2, 2436, 2, 'Available', 3),
+    (3, 2438, 2, 'Available', 3),
+    (4, 2440, 2, 'Available', 3),
+    (5, 2442, 2, 'Available', 3),
+    (6, 2442, 2, 'Available', 3),
+    (7, 2442, 2, 'Available', 3),
+    (8, 3134, 3, 'Available', 3),
+    (9, 3136, 3, 'Available', 4),
+    (10, 3244, 3, 'Available', 6),
+    (11, 3246, 3, 'Available', 6),
+    (12, 3312, 3, 'Available', 4),
+    (13, 3314, 3, 'Available', 4),
+    (14, 3316, 3, 'Available', 4),
+    (15, 3343, 3, 'Available', 4),
+    (16, 3345, 3, 'Available', 4),
+    (17, 3642, 3, 'Available', 4),
+    (18, 3644, 3, 'Available', 4),
+    (19, 3735, 3, 'Available', 3),
+    (20, 3737, 3, 'Available', 4),
+    (21, 3913, 3, 'Available', 4),
+    (22, 3915, 3, 'Available', 4),
+    (23, 3917, 3, 'Available', 4),
+    (24, 3919, 3, 'Available', 6),
+    (25, 3921, 3, 'Available', 4),
+    (26, 3923, 3, 'Available', 4),
+    (27, 3927, 3, 'Available', 6),
+    (28, 3929, 3, 'Available', 6),
+    (29, 4134, 4, 'Available', 9),
+    (30, 4136, 4, 'Available', 6),
+    (31, 4823, 4, 'Available', 9),
+    (32, 5439, 5, 'Available', 9),
+    (33, 5441, 5, 'Available', 9),
+    (34, 5927, 5, 'Available', 4),
+    (35, 5929, 5, 'Available', 4),
+    (36, 5931, 5, 'Available', 4),
+    (37, 5933, 5, 'Available', 4),
+    (38, 6439, 6, 'Available', 9),
+    (39, 6439, 6, 'Available', 9),
+    (40, 6441, 6, 'Available', 9);
+
+-- Inserting into availability_slots
+
+INSERT INTO availability_slots (start_time, is_available)
+VALUES
+    ("10:30am", TRUE),
+    ("11:00am", TRUE),
+    ("11:30am", TRUE),
+    ("12:00am", TRUE),
+    ("12:30am", TRUE),
+    ("1:00pm", TRUE),
+    ("1:30pm", TRUE),
+    ("2:00pm", TRUE),
+    ("2:30pm", TRUE),
+    ("3:00pm", TRUE),
+    ("3:30pm", TRUE),
+    ("4:00pm", TRUE),
+    ("4:30pm", TRUE),
+    ("5:00apm", TRUE),
+    ("5:30pm", TRUE),
+    ("6:00pm", TRUE),
+    ("6:30pm", TRUE),
+    ("7:00pm", TRUE),
+    ("7:30pm", TRUE),
+    ("8:00pm", TRUE),
+    ("8:30pm", TRUE),
+    ("9:00pm", TRUE),
+    ("9:30pm", TRUE),
+    ("10:00pm", TRUE),
+    ("10:30pm", TRUE),
+
