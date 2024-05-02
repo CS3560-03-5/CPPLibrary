@@ -87,24 +87,8 @@ public class App extends Application{
                 System.out.println(LoginPage.e.getText());
                 System.out.println(LoginPage.p.getText());
                 
-                try{
-			        Connection c = DriverManager.getConnection(url, user, pwd);
                 
-                    
-                    String query = "SELECT *"
-                                    +"FROM users"
-                                    +"WHERE broncoID =" + LoginPage.emailInput + " AND password = " + LoginPage.passInput + ";";
-                    Statement isFound= c.createStatement();
-                    ResultSet result= isFound.executeQuery(query);
-
-                    if(result.next()){
-                        //login
-                        System.out.println("Match");
-                        //page saying the user must enroll first
-                    }
-                }catch(Exception e){
-                    System.out.println("ERROR: "+e.getMessage());
-                }
+                
 
                 bp.setTop(FrontPage.topOfPane);
                 bp.setCenter(FrontPage.frontPage);
