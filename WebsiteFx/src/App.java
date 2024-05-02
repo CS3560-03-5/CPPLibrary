@@ -52,8 +52,8 @@ public class App extends Application{
             bp.setMaxHeight(bounds.getMaxY());*/
            
             //opens website on Front Page by default 
-            bp.setTop(FrontPage.topOfPane);
-            bp.setCenter(FrontPage.frontPage);
+            //bp.setTop(FrontPage.topOfPane);
+            bp.setCenter(LoginPage.loginBox);
 
             //Populates the pages with content
             FrontPage.settings(primaryStage);
@@ -73,7 +73,10 @@ public class App extends Application{
             primaryStage.setMaximized(true);
             primaryStage.show();
 
-
+            LoginPage.login.setOnAction( event -> {
+                bp.setTop(FrontPage.topOfPane);
+                bp.setCenter(FrontPage.frontPage);
+            });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
             } );

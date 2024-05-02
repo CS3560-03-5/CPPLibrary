@@ -3,6 +3,7 @@ package pages;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,10 +33,14 @@ public class LoginPage {
 	public static Button login=new Button("Login");
 	
 	public static VBox loginBox = new VBox();
+
 	public static void settings(Stage primaryStage) {
 		
-
+		user.setAlignment(Pos.CENTER);
+		pass.setAlignment(Pos.CENTER);
+		login.setAlignment(Pos.CENTER);
 		loginBox.getChildren().addAll(title, user, pass, login);
+		loginBox.setAlignment(Pos.CENTER);
 	}
 }
 /*
