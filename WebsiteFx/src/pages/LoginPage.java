@@ -16,16 +16,16 @@ import javafx.stage.Stage;
 
 public class LoginPage {
 	public static Label title = new Label("Cal Poly Pomona Library");
-	public static Label usernamePrompt = new Label("Username:");
+	public static Label emailPrompt = new Label("Email:");
 	public static Label passwordPrompt = new Label("Password:");
 
 	
 
-	public static TextField u =new TextField();
+	public static TextField e =new TextField();
 	public static TextField p =new TextField();
 
 
-	public static HBox user = new HBox(usernamePrompt, u);
+	public static HBox email = new HBox(emailPrompt, u);
 	public static HBox pass = new HBox(passwordPrompt, p);
 
 
