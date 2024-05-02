@@ -88,7 +88,6 @@ public class App extends Application{
                 System.out.println(LoginPage.p.getText());
                 
                 
-                
 
                 bp.setTop(FrontPage.topOfPane);
                 bp.setCenter(FrontPage.frontPage);
