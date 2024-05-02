@@ -50,7 +50,7 @@ public class FrontPage extends Application {
     
     public static void settings(Stage primaryStage) {
 
-        studentOptions.getItems().addAll(borrowedBooks, requests, fees, logIn);
+        studentOptions.getItems().addAll(borrowedBooks, requests, fees, logIn, logOut);
 
         studentOptionsBox.setPadding(new Insets(0, 0, 0, 200));
 
