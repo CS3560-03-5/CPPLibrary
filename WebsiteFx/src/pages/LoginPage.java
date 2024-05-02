@@ -54,10 +54,10 @@ public class LoginPage {
  * Scanner scan=new Scanner(System.in);
  * try{
 Connection con=database.getConnection(“databaseFilePath”, “student_email”, “password”);
-String usernameInput=getInputFromTextField;
-String usernameCheck=”SELECT * FROM students WHERE usernameInput=””+usernameinput+””;
+String emailInput=getInputFromTextField;
+String emailCheck=”SELECT * FROM students WHERE emailInput=””+usernameinput+””;
 Statement isFound=con.createStatement();
-ResultSet result=isFound.executeQuery(usernameCheck);
+ResultSet result=isFound.executeQuery(emailCheck);
 if(isFound.next()){
 	//login
 	Else
