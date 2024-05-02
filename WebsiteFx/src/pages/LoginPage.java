@@ -20,7 +20,6 @@ public class LoginPage {
 	public static Label emailPrompt = new Label("Email:");
 	public static Label passwordPrompt = new Label("Password:");
 
-	
 
 	public static TextField e =new TextField();
 	public static TextField p =new TextField();
@@ -45,6 +44,7 @@ public class LoginPage {
 }
 /*
  * Scanner scan=new Scanner(System.in);
+ * try{
 Connection con=database.getConnection(“databaseFilePath”, “student_email”, “password”);
 String usernameInput=getInputFromTextField;
 String usernameCheck=”SELECT * FROM students WHERE usernameInput=””+usernameinput+””;
@@ -54,5 +54,8 @@ if(isFound.next()){
 	//login
 	Else
 	//page saying the user must enroll first
+}
+}catch(Exception e){
+	System.out.println("ERROR: "+e.getMessage());
 }
  */
