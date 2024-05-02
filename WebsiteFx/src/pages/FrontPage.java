@@ -19,6 +19,7 @@ public class FrontPage extends Application {
     public static MenuItem fees = new MenuItem("Fees");
     public static MenuItem requests = new MenuItem("Requests");
     public static MenuItem logIn = new MenuItem("Log In");
+    public static MenuItem logOut = new MenuItem("Log out");
     
     public static VBox studentOptionsBox = new VBox(studentOptions);
 
