@@ -86,25 +86,29 @@ public class App extends Application{
             String pwd = "root";
            
             LoginPage.login.setOnAction( event -> {
-                System.out.println(LoginPage.e.getText());
-                System.out.println(LoginPage.p.getText());
+                String email = LoginPage.e.getText();
+                String password = LoginPage.p.getText();
                 
                 try  {
+                    
+                    
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection c = DriverManager.getConnection(url, user, pwd);
-                    String sql = "select availability_slots.*, studyroom.*"
-                                +"from availability_slots"
-                                +"join  studyroom on studyroom.studyRoom_id = availability_slots.studyRoom_id;";
+                    
+                    String sql = "select * from students"
+                                +"where student_emaill =" + email +" and password = "+password+";";
                     PreparedStatement ps = c.prepareStatement(sql);
                     ResultSet resultSet = ps.executeQuery();
 
-                    while( resultSet.next()) {
+                    System.out.println("proof: " + resultSet.getString("bronco_id"));
+
+                    /*while( resultSet.next()) {
                         String id = resultSet.getString("bronco_id");
                         String email = resultSet.getString("student_email");
                         String name = resultSet.getString("student_name");
                         String password = resultSet.getString("password");
                         System.out.println("bronco id: "+id+", email: "+email+", name: "+ name+", password: "+ password);
-                    } 
+                    } */
                     resultSet.close();
                     ps.close();
                     c.close();

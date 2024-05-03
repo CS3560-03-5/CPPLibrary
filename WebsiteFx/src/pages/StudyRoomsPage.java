@@ -175,7 +175,7 @@ public class StudyRoomsPage {
             e.printStackTrace();
         } catch (Exception e) {
             System.out.println(e);
-        }/*catch (ClassNotFoundException e) {
+        }*//*catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }*/
