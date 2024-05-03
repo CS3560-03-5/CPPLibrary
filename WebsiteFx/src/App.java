@@ -78,12 +78,6 @@ public class App extends Application{
            
             BorderPane bp = new BorderPane();
             bp.setPadding(new Insets(20));
-
-            //fitting borderpane to window
-            /*Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            bp.setMaxWidth(bounds.getMaxX());
-            bp.setMaxHeight(bounds.getMaxY());*/
            
             //opens website on Front Page by default 
             //bp.setTop(FrontPage.topOfPane);
@@ -108,7 +102,7 @@ public class App extends Application{
             primaryStage.show();
 
 
-            String url = "jdbc:mysql://127.0.0.1:3306/?user=root";//"root@localhost:3306/CPP_Library";//"root@127.0.0.1:3306";//"jdbc:mysql://127.0.0.1:3306/?user=root";//"jdbc:mysql://localhost:3306/CPP_Library";
+            String url = "jdbc:mysql://127.0.0.1:3306/?user=root";
             String user = "root";
             String pwd = "root";
            
@@ -118,45 +112,28 @@ public class App extends Application{
                 
                 try  {
                     
-                    
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    //Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection c = DriverManager.getConnection(url, user, pwd);
-                    
-                    /*String sql = "select * from students"
-                                +"where student_email =" + email +" and password = "+password+";";
-                    PreparedStatement ps = c.prepareStatement(sql);
-                    ResultSet resultSet = ps.executeQuery();*/
                     Statement statement = c.createStatement();
-                    ResultSet resultSet = statement.executeQuery("use world; select * from students");
-                    //ResultSet resultSet = statement.executeQuery("select * from students where student_email = '" + email + "' and password = '" + password);
-                        if(resultSet.next()) {
-                            bp.setTop(FrontPage.topOfPane);
-                            bp.setCenter(FrontPage.frontPage);
-                        }
-                        else
-                        {
-                            System.out.println("no account match");
-                        }
-                  
+                    statement.executeUpdate("USE CPP_Library");
+                    
+                    ResultSet  resultSet = statement.executeQuery("SELECT student_email,password FROM students WHERE student_email = '" + email + "';");
+                    resultSet.next();
 
-                    /*while( resultSet.next()) {
-                        String id = resultSet.getString("bronco_id");
-                        String email = resultSet.getString("student_email");
-                        String name = resultSet.getString("student_name");
-                        String password = resultSet.getString("password");
-                        System.out.println("bronco id: "+id+", email: "+email+", name: "+ name+", password: "+ password);
-                    } */
-                    /*resultSet.close();
-                    ps.close();
-                    c.close();*/
+                    if (email.compareTo(resultSet.getString("student_email")) == 0 && password.compareTo(resultSet.getString("password")) == 0) {
+                        bp.setTop(FrontPage.topOfPane);
+                        bp.setCenter(FrontPage.frontPage);
+                    }
+                    else { System.out.println("No match bro");}
+                
+                    statement.close();
+                    resultSet.close();
+                    
                 }catch (SQLException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
                     System.out.println(e);
-                }
-
-                
-
+                } 
             });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
