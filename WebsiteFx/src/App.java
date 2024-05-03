@@ -3,7 +3,9 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javafx.*;
@@ -87,7 +89,30 @@ public class App extends Application{
                 System.out.println(LoginPage.e.getText());
                 System.out.println(LoginPage.p.getText());
                 
-                
+                try  {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection c = DriverManager.getConnection(url, user, pwd);
+                    String sql = "select availability_slots.*, studyroom.*"
+                                +"from availability_slots"
+                                +"join  studyroom on studyroom.studyRoom_id = availability_slots.studyRoom_id;";
+                    PreparedStatement ps = c.prepareStatement(sql);
+                    ResultSet resultSet = ps.executeQuery();
+
+                    while( resultSet.next()) {
+                        String id = resultSet.getString("bronco_id");
+                        String email = resultSet.getString("student_email");
+                        String name = resultSet.getString("student_name");
+                        String password = resultSet.getString("password");
+                        System.out.println("bronco id: "+id+", email: "+email+", name: "+ name+", password: "+ password);
+                    } 
+                    resultSet.close();
+                    ps.close();
+                    c.close();
+                }catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
 
                 bp.setTop(FrontPage.topOfPane);
                 bp.setCenter(FrontPage.frontPage);
