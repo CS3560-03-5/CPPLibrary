@@ -46,8 +46,35 @@ import pages.StudyRoomsPage;
 import pages.LoginPage;
 
 public class App extends Application{
+
+    public static Connection getConnection() throws Exception {
+        try {
+            String driver = "com.mysql.jdbc.Driver";
+            String url = "jdbc:mysql://127.0.0.1:3306/?user=root";
+            String username = "root";
+            String password = "root";
+            Class.forName(driver);
+            
+            Connection conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected");
+            return conn;
+
+        } catch (Exception e) {System.out.println(e);}
+        
+        return null;
+    }
+
+
+
+
     @Override
     public void start(Stage primaryStage) {
+            try {
+                System.out.println("Connection: " + getConnection());
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
            
             BorderPane bp = new BorderPane();
             bp.setPadding(new Insets(20));
@@ -95,12 +122,22 @@ public class App extends Application{
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection c = DriverManager.getConnection(url, user, pwd);
                     
-                    String sql = "select * from students"
-                                +"where student_emaill =" + email +" and password = "+password+";";
+                    /*String sql = "select * from students"
+                                +"where student_email =" + email +" and password = "+password+";";
                     PreparedStatement ps = c.prepareStatement(sql);
-                    ResultSet resultSet = ps.executeQuery();
-
-                    System.out.println("proof: " + resultSet.getString("bronco_id"));
+                    ResultSet resultSet = ps.executeQuery();*/
+                    Statement statement = c.createStatement();
+                    ResultSet resultSet = statement.executeQuery("use world; select * from students");
+                    //ResultSet resultSet = statement.executeQuery("select * from students where student_email = '" + email + "' and password = '" + password);
+                        if(resultSet.next()) {
+                            bp.setTop(FrontPage.topOfPane);
+                            bp.setCenter(FrontPage.frontPage);
+                        }
+                        else
+                        {
+                            System.out.println("no account match");
+                        }
+                  
 
                     /*while( resultSet.next()) {
                         String id = resultSet.getString("bronco_id");
@@ -109,17 +146,16 @@ public class App extends Application{
                         String password = resultSet.getString("password");
                         System.out.println("bronco id: "+id+", email: "+email+", name: "+ name+", password: "+ password);
                     } */
-                    resultSet.close();
+                    /*resultSet.close();
                     ps.close();
-                    c.close();
+                    c.close();*/
                 }catch (SQLException e) {
                     e.printStackTrace();
                 } catch (Exception e) {
                     System.out.println(e);
                 }
 
-                bp.setTop(FrontPage.topOfPane);
-                bp.setCenter(FrontPage.frontPage);
+                
 
             });
             FrontPage.books.setOnMouseClicked(event -> {
