@@ -52,7 +52,7 @@ public class BooksPage extends Application {
 
     
     
-    public static void settings1(Stage primaryStage) {
+    public static void settings(Stage primaryStage) {
         
         /*String url = "root:root://localhost:3306/CPP_Library";
         String user = "root";

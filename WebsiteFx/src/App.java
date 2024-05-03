@@ -85,7 +85,7 @@ public class App extends Application{
 
             //Populates the pages with content
             FrontPage.settings(primaryStage);
-            BooksPage.settings1(primaryStage);
+            BooksPage.settings(primaryStage);
             StudyRoomsPage.settings(primaryStage);
             LoginPage.settings(primaryStage);
     
