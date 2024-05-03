@@ -69,7 +69,6 @@ public class LoginPage {
 							+"WHERE broncoID =" + emailInput + " AND password = " + passInput + ";";
 			Statement isFound= c.createStatement();
 			ResultSet result= isFound.executeQuery(query);
-
 		if(result.next()){
 			//login
 			System.out.println("Match");
@@ -78,8 +77,6 @@ public class LoginPage {
 		}catch(Exception e){
 			System.out.println("ERROR: "+e.getMessage());
 		} */
-
-
 	}
 }
 
