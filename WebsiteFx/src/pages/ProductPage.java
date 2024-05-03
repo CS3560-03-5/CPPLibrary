@@ -22,11 +22,14 @@ public class ProductPage {
                                             +" and unattainable dream.");
     
     // set wrapt text for blurb maybe??????
-
+    public static VBox leftBox=new Vbox();
+    public static VBox rightBox=new Vbox();
+    
     public static Button borrowBtn = new Button("Borrow");
     public static Button requestBtn = new Button("Request");
     
     public static void settings(Stage primaryStage) {
-
+        leftBox.getChildren().addAll(back, Title, Author, productImage, borrowBtn, requestBtn);
+        rightBox.getChildren().addAll(blurb);
     }
 }
