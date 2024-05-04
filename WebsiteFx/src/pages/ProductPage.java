@@ -20,19 +20,11 @@ public class ProductPage {
 
     public static Label back = new Label("< Go back to Books");
     public static ImageView productImage= new ImageView(new Image("\\images\\dune.jpg"));
-    public static Label title = new Label("Dune");
-    public static Label author = new Label("Frank Herbert");
-    public static Label blurb = new Label("Set on the desert planet Arrakis, Dune is the story of the boy Paul Atreides, heir to a"
-                                            +" noble family tasked with ruling an inhospitable world where the only thing of value is"
-                                            +" the “spice” melange, a drug capable of extending life and enhancing consciousness. Coveted"
-                                            +" across the known universe, melange is a prize worth killing for...\r\n" + "\r\n" 
-                                            + //
-                                            "When House Atreides is betrayed, the destruction of Paul’s family will set the boy on a "
-                                            +"journey toward a destiny greater than he could ever have imagined. And as he evolves into"
-                                            +" the mysterious man known as Muad’Dib, he will bring to fruition humankind’s most ancient"
-                                            +" and unattainable dream.");
-    public static Label genre = new Label("Science Fiction");
-    public static Label publishedDate = new Label("A Date in Time");
+    public static Label title = new Label("");
+    public static Label author = new Label("");
+    public static Label blurb = new Label("");
+    public static Label genre = new Label("");
+    public static Label publishedDate = new Label("");
    
     
     public static Button checkoutBtn = new Button("Borrow");
@@ -52,13 +44,14 @@ public class ProductPage {
         productOptions.setAlignment(Pos.TOP_CENTER);
         productOptions.setSpacing(20);
 
-        title.setStyle("-fx-font-family: Georgia; -fx-font-size: 32px;");
+        title.setStyle("-fx-font-family: Georgia; -fx-font-size: 32px;"); title.setWrapText(true);
         author.setStyle("-fx-font-family: Georgia; -fx-font-size: 22px;");
         blurb.setStyle("-fx-font-family: Montserrat; -fx-font-size: 20px; -fx-text-fill: gray;");
         genre.setStyle("-fx-font-size: 15px;");
         publishedDate.setStyle("-fx-font-size: 15px;");
 
-        description.setPrefWidth(600);
+        description.minWidth(600);
+        description.setPrefWidth(1000);
         description.setSpacing(10);
         blurb.setWrapText(true);
 

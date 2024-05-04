@@ -66,7 +66,7 @@ public class App extends Application{
     }
 
 
-
+    public static double pos = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -230,10 +230,36 @@ public class App extends Application{
             
             for(HBox h: BooksPage.options) {
                 h.setOnMouseClicked(e -> {
+                    int index = 0;
+                    for(int i = 0; i < BooksPage.booksPage.getChildren().size(); i++) {
+                        if(h == BooksPage.booksPage.getChildren().get(i)) {
+                            index = i/2;
+                        }
+                    }
+                    ProductPage.productImage.setImage(BooksPage.images[index]);
+                    ProductPage.title.setText(BooksPage.titles[index]);
+                    ProductPage.author.setText(BooksPage.authors[index]);
+                    ProductPage.blurb.setText(BooksPage.blurbs[index]);
+                    ProductPage.genre.setText(BooksPage.subjects[index]);
+                    ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[index]);
+                    pos = sp.getVvalue();
+                    System.out.println("Vertical position in the scroll pane: "+pos);
                     bp.setCenter(ProductPage.productPage);
                     
                 });
             }
+
+            ProductPage.back.setOnMouseEntered(event -> {
+                ProductPage.back.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+            });
+            ProductPage.back.setOnMouseExited(event -> {
+                ProductPage.back.setStyle("-fx-text-fill: black; -fx-underline: false;");
+            });
+            ProductPage.back.setOnMouseClicked(event -> {
+                bp.setCenter(BooksPage.booksPage);
+                sp.layout();
+                sp.setVvalue(pos);
+            });
             
             
             
