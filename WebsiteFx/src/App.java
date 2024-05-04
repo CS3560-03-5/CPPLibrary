@@ -258,8 +258,17 @@ public class App extends Application{
             ProductPage.back.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
                 sp.layout();
-                sp.setVvalue(pos);
+                sp.setVvalue(pos+0.00954519909);
             });
+            
+            ProductPage.checkoutBtn.setOnMouseEntered(event -> {
+                ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color: darkgreen; -fx-text-fill: white; -fx-font-weight: bold; /*-fx-background-insets: -5, 0, -5, 0;*/ ");
+            });
+            ProductPage.checkoutBtn.setOnMouseExited(event -> {
+                ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:green; -fx-text-fill: white; -fx-font-weight: bold;");
+            });
+            
+
             
             
             
