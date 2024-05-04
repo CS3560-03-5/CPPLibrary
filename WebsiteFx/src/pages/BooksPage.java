@@ -153,9 +153,9 @@ public class BooksPage extends Application {
         }
 
         for(int i = 0; i < options.length; i++) {
-            Font font = Font.font("Arial", FontWeight.BOLD, 20);
-            Label l1 = new Label(titles[i]); l1.setFont(font);
-            Label l2 = new Label(authors[i]);
+            
+            Label l1 = new Label(titles[i]);  l1.setStyle("-fx-font-family: Georgia; -fx-font-weight: bold; -fx-font-size: 20px;");
+            Label l2 = new Label(authors[i]); l2.setStyle("-fx-font-family: Georgia;");
             
             VBox vbox = new VBox(l1, l2);
             vbox.setSpacing(7);

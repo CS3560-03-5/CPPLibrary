@@ -44,6 +44,7 @@ import pages.BooksPage;
 import pages.FrontPage;
 import pages.StudyRoomsPage;
 import pages.LoginPage;
+import pages.ProductPage;
 
 public class App extends Application{
 
@@ -88,6 +89,7 @@ public class App extends Application{
             BooksPage.settings(primaryStage);
             StudyRoomsPage.settings(primaryStage);
             LoginPage.settings(primaryStage);
+            ProductPage.settings(primaryStage);
     
             ScrollPane sp = new ScrollPane();
             sp.setContent(bp);
@@ -228,7 +230,7 @@ public class App extends Application{
             
             for(HBox h: BooksPage.options) {
                 h.setOnMouseClicked(e -> {
-                    bp.setCenter(FrontPage.frontPage);
+                    bp.setCenter(ProductPage.productPage);
                     
                 });
             }
