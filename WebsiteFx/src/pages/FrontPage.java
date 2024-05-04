@@ -50,7 +50,7 @@ public class FrontPage extends Application {
     
     public static void settings(Stage primaryStage) {
 
-        studentOptions.getItems().addAll(borrowedBooks, requests, fees, logIn, logOut);
+        studentOptions.getItems().addAll(borrowedBooks, requests, fees, /*logIn,*/ logOut);
 
         studentOptionsBox.setPadding(new Insets(0, 0, 0, 200));
 
@@ -62,6 +62,7 @@ public class FrontPage extends Application {
         middleOptions.setSpacing(50);
     
         topOfPane.setAlignment(Pos.CENTER);
+        topOfPane.setPadding(new Insets(0, 0, 20, 0));
                 
         search.setSpacing(10);
         search.setAlignment(Pos.CENTER);

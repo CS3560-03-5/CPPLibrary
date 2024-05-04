@@ -117,10 +117,11 @@ public class App extends Application{
                     Statement statement = c.createStatement();
                     statement.executeUpdate("USE CPP_Library");
                     
-                    ResultSet  resultSet = statement.executeQuery("SELECT student_email,password FROM students WHERE student_email = '" + email + "';");
+                    ResultSet  resultSet = statement.executeQuery("SELECT student_email,password,student_name FROM students WHERE student_email = '" + email + "';");
                     resultSet.next();
 
                     if (email.compareTo(resultSet.getString("student_email")) == 0 && password.compareTo(resultSet.getString("password")) == 0) {
+                        FrontPage.studentOptions.setText(resultSet.getString("student_name"));
                         bp.setTop(FrontPage.topOfPane);
                         bp.setCenter(FrontPage.frontPage);
                     }
@@ -134,6 +135,10 @@ public class App extends Application{
                 } catch (Exception e) {
                     System.out.println(e);
                 } 
+            });
+            FrontPage.logOut.setOnAction(event -> {
+                bp.setTop(null);
+                bp.setCenter(LoginPage.loginBox);
             });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
