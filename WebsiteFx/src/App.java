@@ -332,12 +332,12 @@ public class App extends Application{
                 
             });
             AccountNotFoundPagePage.back.setOnMouseEntered(event -> {
-                ProductPage.back.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+                ProductPage.backToLogin.setStyle("-fx-text-fill: blue; -fx-underline: true;");
             });
             AccountNotFoundPagePage.back.setOnMouseExited(event -> {
-                ProductPage.back.setStyle("-fx-text-fill: black; -fx-underline: false;");
+                ProductPage.backToLogin.setStyle("-fx-text-fill: black; -fx-underline: false;");
             });
-            AccountNotFoundPagePage.back.setOnMouseClicked(event -> {
+            AccountNotFoundPagePage.backToLogin.setOnMouseClicked(event -> {
                 bp.setCenter(LoginPage.loginPage);
                 sp.layout();
                 sp.setVvalue(pos+0.00954519909);
