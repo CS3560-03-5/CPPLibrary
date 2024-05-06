@@ -331,7 +331,11 @@ public class App extends Application{
 
                 
             });
+<<<<<<< HEAD
             AccountNotFoundPage.back.setOnMouseEntered(event -> {
+=======
+            AccountNotFoundPagePage.back.setOnMouseEntered(event -> {
+>>>>>>> 472d165e85e0c27fc28d59444eaab59cafe66d9f
                 ProductPage.backToLogin.setStyle("-fx-text-fill: blue; -fx-underline: true;");
             });
             AccountNotFoundPage.back.setOnMouseExited(event -> {
