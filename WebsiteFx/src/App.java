@@ -331,7 +331,7 @@ public class App extends Application{
 
                 
             });
-            AccountNotFoundPagePage.backToLogin.setOnMouseEntered(event -> {
+            AccountNotFoundPagePage.back.setOnMouseEntered(event -> {
                 ProductPage.backToLogin.setStyle("-fx-text-fill: blue; -fx-underline: true;");
             });
             AccountNotFoundPagePage.back.setOnMouseExited(event -> {
