@@ -147,71 +147,79 @@ public class App extends Application{
                 } catch (Exception e) {
                     System.out.println(e);
                 } 
-                
-                try {
-                    Connection c = DriverManager.getConnection(url, user, pwd);
-                    Statement statement = c.createStatement();
-                    statement.executeUpdate("USE CPP_Library");
-                    
-                    ResultSet  resultSet = statement.executeQuery("SELECT COUNT(*) FROM students;");
-                    resultSet.next();
-                    int columns = resultSet.getInt(1);
- 
-                    ResultSet resultSet1 = statement.executeQuery("SELECT COUNT(*) FROM books");
-                    resultSet1.next();
-                    int rows = resultSet1.getInt(1);
-                    
-                    BooksPage.borrowedBooks = new int[rows][columns];
-                    BooksPage.users = new String[columns];
-                    
-                    ResultSet resultSet2 = statement.executeQuery("SELECT student_name FROM students");
-                    int i = 0;
-                    while(resultSet2.next()) {
-                        BooksPage.users[i] = resultSet2.getString("student_name");
-                        i++;
-                    }
+                if (fillonce == false) {
+                    try {
+                        Connection c = DriverManager.getConnection(url, user, pwd);
+                        Statement statement = c.createStatement();
+                        statement.executeUpdate("USE CPP_Library");
+                        
+                        ResultSet  resultSet = statement.executeQuery("SELECT COUNT(*) FROM students;");
+                        resultSet.next();
+                        int columns = resultSet.getInt(1);
+    
+                        ResultSet resultSet1 = statement.executeQuery("SELECT COUNT(*) FROM books");
+                        resultSet1.next();
+                        int rows = resultSet1.getInt(1);
+                        
+                        BooksPage.borrowedBooks = new int[rows][columns];
+                        BooksPage.users = new String[columns];
+                        
+                        ResultSet resultSet2 = statement.executeQuery("SELECT student_name FROM students");
+                        int i = 0;
+                        while(resultSet2.next()) {
+                            BooksPage.users[i] = resultSet2.getString("student_name");
+                            i++;
+                        }
 
-                    for(int x = 0; x < BooksPage.borrowedBooks[0].length; x++) {
-                        System.out.println("This column is: "+ BooksPage.users[x]);
-                    }
+                        for(int x = 0; x < BooksPage.borrowedBooks[0].length; x++) {
+                            System.out.println("This column is: "+ BooksPage.users[x]);
+                        }
 
-                    //Arrays.fill(BooksPage.borrowedBooks, -1);
-                    if (fillonce == true) {
+                        //Arrays.fill(BooksPage.borrowedBooks, -1);
+                        //if (fillonce == false) {
+                            for (int row = 0; row < BooksPage.borrowedBooks.length; row++) {
+                                for (int col = 0; col < BooksPage.borrowedBooks[0].length; col++) {
+                                    BooksPage.borrowedBooks[row][col] = -1;
+                                }
+                            }
+                        //    fillonce = true;
+                        //}
+                        System.out.println("Borrowed books array: ");
                         for (int row = 0; row < BooksPage.borrowedBooks.length; row++) {
                             for (int col = 0; col < BooksPage.borrowedBooks[0].length; col++) {
-                                BooksPage.borrowedBooks[row][col] = -1;
+                                System.out.print(BooksPage.borrowedBooks[row][col] + " ");
                             }
+                            System.out.println();
                         }
-                        fillonce = false;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        System.out.println(e);
                     }
-                    
-        
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (Exception e) {
-                    System.out.println(e);
+                    fillonce = true;
                 }
 
                 int account = BooksPage.findUserIndex(BooksPage.users, FrontPage.studentOptions.getText());
                 System.out.println("account index: " + account);
-                System.out.println("account at index" + BooksPage.authors[account]);
+                System.out.println("account at index" + BooksPage.users[account]);
 
-                /*for(int i = 0; i < BooksPage.borrowedBooks.length; i++) {
+                for(int i = 0; i < BooksPage.borrowedBooks.length; i++) {
             
                     
                     if (BooksPage.borrowedBooks[i][account] != -1) {
                         Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[i][account]]);
                         l.setPadding(new Insets(20, 20, 20, 0));
-                        borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l /*BooksPage.options[ BooksPage.borrowedBooks[i][user] ]*//*, new Separator(Orientation.HORIZONTAL));
+                        borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
                     }
                     
-                }*/
+                }
 
             });
             FrontPage.logOut.setOnAction(event -> {
                 bp.setTop(null);
                 bp.setCenter(LoginPage.loginBox);
                 borrowedBooksPage.borrowedBooksPage.getChildren().clear();
+                FrontPage.studentOptions.setText("");
             });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
@@ -258,28 +266,12 @@ public class App extends Application{
                 }
             }
 
-            int highlightNodes = 0;
             for(Node n: StudyRoomsPage.blockTable.getChildren()) {
                 if(GridPane.getRowIndex(n) > 0 && GridPane.getRowIndex(n) < StudyRoomsPage.roomsBox.getChildren().size() && GridPane.getColumnIndex(n) < StudyRoomsPage.blockTimes.length ) {
                     Rectangle r = (Rectangle) n;
-                    
-                    /*r.setOnMouseClicked(e -> {
-                        
-                        
-                    });*/
-                    
                     r.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                        private int highlightNodes;
-
                         @Override
                         public void handle(MouseEvent arg0) {
-                            // TODO Auto-generated method stub
-                            /*int i = GridPane.getColumnIndex(n);
-                            for(int x = i; x < i+5; x++) {
-                                StudyRoomsPage.blockTable()
-                            }*/
-                            this.highlightNodes = 5;
                             r.setFill(Color.YELLOW);
                             throw new UnsupportedOperationException("Unimplemented method 'handle'");
                         }
@@ -306,6 +298,7 @@ public class App extends Application{
                     for(int i = 0; i < BooksPage.booksPage.getChildren().size(); i++) {
                         if(h == BooksPage.booksPage.getChildren().get(i)) {
                             selectedBookIndex = i/2;//index = i/2;
+                            System.out.println("selectedBookIndex = "+selectedBookIndex);
                         }
                     }
                     ProductPage.productImage.setImage(BooksPage.images[selectedBookIndex/*index*/]);
@@ -346,8 +339,7 @@ public class App extends Application{
                     System.out.println("copies now: "+BooksPage.copies[selectedBookIndex]);
                     BooksPage.copies[selectedBookIndex] = BooksPage.copies[selectedBookIndex] - 1;
                     System.out.println("copies later: "+BooksPage.copies[selectedBookIndex]);
-                    try  {
-                        
+                    try  {    
                         //Class.forName("com.mysql.cj.jdbc.Driver");
                         Connection c = DriverManager.getConnection(url, user, pwd); 
                         PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = ? WHERE title = + ? ;");
@@ -355,13 +347,7 @@ public class App extends Application{
                         
                         statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
                         statement.setString(2, BooksPage.titles[selectedBookIndex]);
-                        //statement.executeUpdate("USE CPP_Library");
-
-                        /*statement.executeUpdate("USE CPP_Library");
                         
-                    
-                        ResultSet  resultSet = statement.executeQuery("UPDATE books SET available_copies = '"+BooksPage.copies[selectedBookIndex]+"' WHERE title = '"+ BooksPage.titles[selectedBookIndex]+"';");     
-                        resultSet.next();*/
                         
                 }catch (SQLException e) {
                         e.printStackTrace();
@@ -369,14 +355,24 @@ public class App extends Application{
                         System.out.println(e);
                     } 
                 //}
+
                 BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
                 
                 int u = BooksPage.findUserIndex(BooksPage.users, FrontPage.studentOptions.getText());
                 
-                Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[selectedBookIndex][u]]);
+                System.out.println("borrowing[index]: "+ BooksPage.borrowedBooks[selectedBookIndex][u]);
+                //Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[selectedBookIndex][u]]);//make everything just selectedBookIndex
+                Label l = new Label(BooksPage.titles[selectedBookIndex]);
                 l.setPadding(new Insets(20, 20, 20, 0));
-                borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
 
+                borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
+                System.out.println("Borrowed books array: ");
+                    for (int row = 0; row < BooksPage.borrowedBooks.length; row++) {
+                        for (int col = 0; col < BooksPage.borrowedBooks[0].length; col++) {
+                            System.out.print(BooksPage.borrowedBooks[row][col] + " ");
+                        }
+                        System.out.println();
+                    }
                 
             });
             AccountNotFoundPage.backToLogin.setOnMouseEntered(event -> {
@@ -395,7 +391,22 @@ public class App extends Application{
                 bp.setCenter(borrowedBooksPage.borrowedBooksPage);
             });
 
+            //FOR SEARCH FUNCTION use the code below
+            //use findUserIndex for the name of the book(name) and titles(the array)
+            //set selectedBookIndex equal to the result
+            //populate w/ format below
+            //bring up product page
             
+            //ALSO search needs to be a button now(instead of a label), on the right side of the search box, and right next to the bar(no spacing)
+            /*
+             * ProductPage.productImage.setImage(BooksPage.images[selectedBookIndex]);
+             ProductPage.title.setText(BooksPage.titles[selectedBookIndex]);
+             ProductPage.author.setText(BooksPage.authors[selectedBookIndex]);
+             ProductPage.blurb.setText(BooksPage.blurbs[selectedBookIndex]);
+             ProductPage.genre.setText(BooksPage.subjects[selectedBookIndex]);
+             ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[selectedBookIndex]);
+             bp.setCenter(ProductPage.productPage);
+             */
             
             
     }
