@@ -351,9 +351,9 @@ public class App extends Application{
                         PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = ? WHERE title = + ? ;");
                         //PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = available_copies - 1  WHERE title = 'Dune Messiah';");
                         
-                        statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
-                        statement.setString(2, BooksPage.titles[selectedBookIndex]);
-                        //statement.executeUpdate("USE CPP_Library");
+                        //statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
+                        //statement.setString(2, BooksPage.titles[selectedBookIndex]);
+                        statement.executeUpdate("USE CPP_Library");
 
                         /*statement.executeUpdate("USE CPP_Library");
                         
