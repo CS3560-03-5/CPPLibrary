@@ -330,7 +330,7 @@ public class App extends Application{
                 sp.layout();
                 sp.setVvalue(pos+0.00954519909);
             });
-            
+
             ProductPage.checkoutBtn.setOnMouseEntered(event -> {
                 ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color: darkgreen; -fx-text-fill: white; -fx-font-weight: bold; /*-fx-background-insets: -5, 0, -5, 0;*/ ");
             });
@@ -340,6 +340,7 @@ public class App extends Application{
             ProductPage.checkoutBtn.setOnMouseClicked(event-> {
                 //if (BooksPage.copies[selectedBookIndex] > 0) {
                     //BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
+                    ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:blue; -fx-text-fill: white; -fx-font-weight: bold;");
                     System.out.println("copies now: "+BooksPage.copies[selectedBookIndex]);
                     BooksPage.copies[selectedBookIndex] = BooksPage.copies[selectedBookIndex] - 1;
                     System.out.println("copies later: "+BooksPage.copies[selectedBookIndex]);
@@ -347,7 +348,7 @@ public class App extends Application{
                         
                         //Class.forName("com.mysql.cj.jdbc.Driver");
                         Connection c = DriverManager.getConnection(url, user, pwd); 
-                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = '"+(BooksPage.copies[selectedBookIndex])+"' WHERE title = '"+ BooksPage.titles[selectedBookIndex]+"';");
+                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = ? WHERE title = + ? ;");
                         //PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = available_copies - 1  WHERE title = 'Dune Messiah';");
                         
                         statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
@@ -373,7 +374,6 @@ public class App extends Application{
                 Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[selectedBookIndex][u]]);
                 l.setPadding(new Insets(20, 20, 20, 0));
                 borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
-                ProductPage.checkoutBtn.setStyle("-fx-background-color: blue;");
 
                 
             });
