@@ -40,6 +40,8 @@ public class LoginPage {
 
 	public static String emailInput;
 	public static String passInput;
+
+	
 	
 	public static void settings(Stage primaryStage) {
 		

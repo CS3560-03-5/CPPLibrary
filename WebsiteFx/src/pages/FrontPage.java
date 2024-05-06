@@ -39,7 +39,7 @@ public class FrontPage extends Application {
     public static HBox topOfPane = new HBox(homeBox, middleOptions, studentOptionsBox);
 
     public static Label searchPrompt = new Label("Search");
-    public static TextField searchField = new TextField("Enter a Book, Author, or Publisher");
+    public static TextField searchField = new TextField();
     public static HBox search = new HBox(searchPrompt, searchField);
 
     public static Button libraryChat = new Button("Chat with a Librarian");
@@ -50,6 +50,7 @@ public class FrontPage extends Application {
     
     public static void settings(Stage primaryStage) {
 
+        searchField.setPromptText("Enter Book or Author");
         studentOptions.getItems().addAll(borrowedBooks, requests, fees, /*logIn,*/ logOut);
 
         studentOptionsBox.setPadding(new Insets(0, 0, 0, 200));

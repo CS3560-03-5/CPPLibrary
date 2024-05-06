@@ -67,6 +67,7 @@ public class App extends Application{
 
 
     public static double pos = 0;
+    public static int selectedBookIndex = 0;
 
     @Override
     public void start(Stage primaryStage) {
@@ -126,6 +127,7 @@ public class App extends Application{
                         FrontPage.studentOptions.setText(resultSet.getString("student_name"));
                         bp.setTop(FrontPage.topOfPane);
                         bp.setCenter(FrontPage.frontPage);
+                        System.out.println("user: "+ FrontPage.studentOptions.getText());
                     }
                     else { System.out.println("No match bro");}
                 
@@ -137,6 +139,41 @@ public class App extends Application{
                 } catch (Exception e) {
                     System.out.println(e);
                 } 
+                
+                try {
+                    Connection c = DriverManager.getConnection(url, user, pwd);
+                    Statement statement = c.createStatement();
+                    statement.executeUpdate("USE CPP_Library");
+                    
+                    ResultSet  resultSet = statement.executeQuery("SELECT COUNT(*) FROM students;");
+                    
+                    resultSet.next();
+                    int columns = resultSet.getInt(1);
+
+                    ResultSet resultSet1 = statement.executeQuery("SELECT COUNT(*) FROM books");
+                    resultSet1.next();
+                    int rows = resultSet1.getInt(1)+1;
+                    BooksPage.reservedBooks = new String[rows][columns];
+                    
+                    ResultSet resultSet2 = statement.executeQuery("SELECT student_name FROM students");
+                    int i = 0;
+                    while(resultSet2.next()) {
+                        BooksPage.reservedBooks[0][i] = resultSet2.getString("student_name");
+                        i++;
+                    }
+
+                    for(int x = 0; x < BooksPage.reservedBooks[0].length; x++) {
+                        System.out.println("This column is: "+BooksPage.reservedBooks[0][x]);
+                    }
+
+                    
+        
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
             });
             FrontPage.logOut.setOnAction(event -> {
                 bp.setTop(null);
@@ -230,18 +267,18 @@ public class App extends Application{
             
             for(HBox h: BooksPage.options) {
                 h.setOnMouseClicked(e -> {
-                    int index = 0;
+                    //int index = 0;
                     for(int i = 0; i < BooksPage.booksPage.getChildren().size(); i++) {
                         if(h == BooksPage.booksPage.getChildren().get(i)) {
-                            index = i/2;
+                            selectedBookIndex = i/2;//index = i/2;
                         }
                     }
-                    ProductPage.productImage.setImage(BooksPage.images[index]);
-                    ProductPage.title.setText(BooksPage.titles[index]);
-                    ProductPage.author.setText(BooksPage.authors[index]);
-                    ProductPage.blurb.setText(BooksPage.blurbs[index]);
-                    ProductPage.genre.setText(BooksPage.subjects[index]);
-                    ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[index]);
+                    ProductPage.productImage.setImage(BooksPage.images[selectedBookIndex/*index*/]);
+                    ProductPage.title.setText(BooksPage.titles[selectedBookIndex/*index*/]);
+                    ProductPage.author.setText(BooksPage.authors[selectedBookIndex/*index*/]);
+                    ProductPage.blurb.setText(BooksPage.blurbs[selectedBookIndex/*index*/]);
+                    ProductPage.genre.setText(BooksPage.subjects[selectedBookIndex/*index*/]);
+                    ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[selectedBookIndex/*index*/]);
                     pos = sp.getVvalue();
                     System.out.println("Vertical position in the scroll pane: "+pos);
                     bp.setCenter(ProductPage.productPage);
@@ -267,6 +304,33 @@ public class App extends Application{
             ProductPage.checkoutBtn.setOnMouseExited(event -> {
                 ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:green; -fx-text-fill: white; -fx-font-weight: bold;");
             });
+            ProductPage.checkoutBtn.setOnMouseClicked(event-> {
+                if (BooksPage.copies[selectedBookIndex] > 0) {
+                    BooksPage.addBook(BooksPage.reservedBooks,FrontPage.studentOptions.getText(), BooksPage.titles[selectedBookIndex] );
+                    BooksPage.copies[selectedBookIndex]--;
+                    try  {
+                        
+                        //Class.forName("com.mysql.cj.jdbc.Driver");
+                        Connection c = DriverManager.getConnection(url, user, pwd);
+                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = '"+BooksPage.copies[selectedBookIndex]+"' WHERE title = '"+ BooksPage.titles[selectedBookIndex]+"';");
+                        statement.executeUpdate("USE CPP_Library");
+
+                        /*statement.executeUpdate("USE CPP_Library");
+                        
+                    
+                        ResultSet  resultSet = statement.executeQuery("UPDATE books SET available_copies = '"+BooksPage.copies[selectedBookIndex]+"' WHERE title = '"+ BooksPage.titles[selectedBookIndex]+"';");     
+                        resultSet.next();*/
+                        
+                }catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    } 
+                }
+
+                
+            });
+
             
 
             

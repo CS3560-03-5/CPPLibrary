@@ -21,6 +21,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+
+
 public class BooksPage extends Application {
     //int n = 12;//placeholder number of books
 
@@ -67,6 +69,7 @@ public class BooksPage extends Application {
     public static String[] isbns;
     public static int[] copies;
     public static String[] subjects;
+    public static String[][] reservedBooks;
 
 
     public static HBox[] options;
@@ -116,6 +119,7 @@ public class BooksPage extends Application {
             resultSet.next();
 
             titles = new String[resultSet.getInt(1)];
+            
             authors = new String[resultSet.getInt(1)];
             dates = new String[resultSet.getInt(1)];
             isbns = new String[resultSet.getInt(1)];
@@ -170,9 +174,6 @@ public class BooksPage extends Application {
             options[i] = hbox;
 
             booksPage.getChildren().addAll(hbox, new Separator(Orientation.HORIZONTAL));
-            
-
-            
         }
         
 
@@ -204,6 +205,25 @@ public class BooksPage extends Application {
         
     }
 
+    public static void addBook(String[][] a, String name, String title ) {
+        int user = 0;
+        for(int i = 0; i < a[0].length; i++) {
+            if(name.compareTo(a[0][user]) == 0 ) {
+                user = i;
+            }
+        }
+        boolean containsTitle = false;
+        for(int j = 0; j < a.length; j++) {
+            if(title.compareTo(a[0][user]) == 0) {
+                containsTitle = true;
+            }
+            if(a[j][user] == null && containsTitle == false) {
+                a[j][user] = title;
+                break;
+            }
+        }
+    }
+    
     public static String[] blurbs = {
         "This highly anticipated revision builds upon the strengths of the previous edition. Sipser's candid, "+
         "crystal-clear style allows students at every level to understand and enjoy this field. His innovative "+

@@ -75,6 +75,6 @@ class book {
     public String getSubject() { return subject; }
     public void setSubject(String subject) { this.subject = subject; }
 
-    public boolean isAvailable() { return availableCopies > 0; }
-    public void setAvailable(boolean available) { this.isAvailable = available; }
+/*  public boolean isAvailable() { return availableCopies > 0; }
+    public void setAvailable(boolean available) { this.isAvailable = available; } */
 }
