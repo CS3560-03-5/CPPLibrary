@@ -330,6 +330,11 @@ public class App extends Application{
                 sp.layout();
                 sp.setVvalue(pos+0.00954519909);
             });
+            ProductPage.checkoutBtn.setOnMouseClicked(event -> {
+                ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:blue; -fx-text-fill: white; -fx-font-weight: bold;");
+            }
+            
+            )
             
             ProductPage.checkoutBtn.setOnMouseEntered(event -> {
                 ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color: darkgreen; -fx-text-fill: white; -fx-font-weight: bold; /*-fx-background-insets: -5, 0, -5, 0;*/ ");
