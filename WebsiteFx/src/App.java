@@ -136,7 +136,7 @@ public class App extends Application{
                         System.out.println("user: "+ FrontPage.studentOptions.getText());
                     }
                     else { 
-                        bp.setCenter(AccountNotFoundPage.accountNotFoundPage);
+                        bp.setCenter(AccountNotFoundPage.messageBox);
                         }
                 
                     statement.close();
