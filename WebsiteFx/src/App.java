@@ -85,6 +85,8 @@ public class App extends Application{
            
             BorderPane bp = new BorderPane();
             bp.setPadding(new Insets(20));
+            //BorderPane accountNotFoundBP=new BorderPane();
+            //accountNotFoundBP.setCenter(AccountNotFoundPage.messageBox);
            
             //opens website on Front Page by default 
             //bp.setTop(FrontPage.topOfPane);
@@ -96,6 +98,7 @@ public class App extends Application{
             StudyRoomsPage.settings(primaryStage);
             LoginPage.settings(primaryStage);
             ProductPage.settings(primaryStage);
+            AccountNotFoundPage.settings(primaryStage);
             
     
             ScrollPane sp = new ScrollPane();
@@ -136,7 +139,7 @@ public class App extends Application{
                         System.out.println("user: "+ FrontPage.studentOptions.getText());
                     }
                     else { 
-                        bp.setCenter(AccountNotFoundPage.accountNotFoundPage);
+                        bp.setCenter(AccountNotFoundPage.messageBox);
                         }
                 
                     statement.close();
