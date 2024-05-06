@@ -69,7 +69,8 @@ public class BooksPage extends Application {
     public static String[] isbns;
     public static int[] copies;
     public static String[] subjects;
-    public static String[][] reservedBooks;
+    public static String[] users;
+    public static int[][] borrowedBooks;
 
 
     public static HBox[] options;
@@ -205,7 +206,7 @@ public class BooksPage extends Application {
         
     }
 
-    public static void addBook(String[][] a, String name, String title ) {
+    /*public static void addBook(String[][] a, String name, String title ) {
         int user = 0;
         for(int i = 0; i < a[0].length; i++) {
             if(name.compareTo(a[0][user]) == 0 ) {
@@ -222,7 +223,35 @@ public class BooksPage extends Application {
                 break;
             }
         }
+    }*/
+    
+    public static int findUserIndex(String[] arr, String userName) {
+        for(int i = 0; i < arr.length; i++) {
+            
+            if(userName.compareTo((String) arr[i]) == 0 ) {
+                System.out.println(arr[i] + " matches "+ userName);
+                return i;
+            }
+        }
+        return -1;
     }
+    public static void addBook(String[] a, int[][] b, String name, int index) {
+        int user = findUserIndex(a, name);
+        boolean containsBook = false;
+        for(int j = 0; j < a.length; j++) {
+            //System.out.println(a[j][user] + " compared to " + index);
+            if(index == b[j][user]) {
+                
+                containsBook = true;
+            }
+            if(b[j][user] == -1 && containsBook == false) {
+                b[j][user] = index;
+                break;
+            }
+            
+        }
+    }
+    
     
     public static String[] blurbs = {
         "This highly anticipated revision builds upon the strengths of the previous edition. Sipser's candid, "+

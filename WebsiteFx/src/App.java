@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 
 import javafx.*;
 import javafx.application.Application;
@@ -46,6 +47,7 @@ import pages.StudyRoomsPage;
 import pages.LoginPage;
 import pages.ProductPage;
 import pages.AccountNotFoundPage;
+import pages.borrowedBooksPage;
 
 public class App extends Application{
 
@@ -70,6 +72,8 @@ public class App extends Application{
     public static double pos = 0;
     public static int selectedBookIndex = 0;
 
+    boolean fillonce = false;
+
     @Override
     public void start(Stage primaryStage) {
             try {
@@ -92,6 +96,7 @@ public class App extends Application{
             StudyRoomsPage.settings(primaryStage);
             LoginPage.settings(primaryStage);
             ProductPage.settings(primaryStage);
+            
     
             ScrollPane sp = new ScrollPane();
             sp.setContent(bp);
@@ -147,26 +152,36 @@ public class App extends Application{
                     statement.executeUpdate("USE CPP_Library");
                     
                     ResultSet  resultSet = statement.executeQuery("SELECT COUNT(*) FROM students;");
-                    
                     resultSet.next();
                     int columns = resultSet.getInt(1);
-
+ 
                     ResultSet resultSet1 = statement.executeQuery("SELECT COUNT(*) FROM books");
                     resultSet1.next();
-                    int rows = resultSet1.getInt(1)+1;
-                    BooksPage.reservedBooks = new String[rows][columns];
+                    int rows = resultSet1.getInt(1);
+                    
+                    BooksPage.borrowedBooks = new int[rows][columns];
+                    BooksPage.users = new String[columns];
                     
                     ResultSet resultSet2 = statement.executeQuery("SELECT student_name FROM students");
                     int i = 0;
                     while(resultSet2.next()) {
-                        BooksPage.reservedBooks[0][i] = resultSet2.getString("student_name");
+                        BooksPage.users[i] = resultSet2.getString("student_name");
                         i++;
                     }
 
-                    for(int x = 0; x < BooksPage.reservedBooks[0].length; x++) {
-                        System.out.println("This column is: "+BooksPage.reservedBooks[0][x]);
+                    for(int x = 0; x < BooksPage.borrowedBooks[0].length; x++) {
+                        System.out.println("This column is: "+ BooksPage.users[x]);
                     }
 
+                    //Arrays.fill(BooksPage.borrowedBooks, -1);
+                    if (fillonce == true) {
+                        for (int row = 0; row < BooksPage.borrowedBooks.length; row++) {
+                            for (int col = 0; col < BooksPage.borrowedBooks[0].length; col++) {
+                                BooksPage.borrowedBooks[row][col] = -1;
+                            }
+                        }
+                        fillonce = false;
+                    }
                     
         
                 } catch (SQLException e) {
@@ -175,13 +190,30 @@ public class App extends Application{
                     System.out.println(e);
                 }
 
+                int account = BooksPage.findUserIndex(BooksPage.users, FrontPage.studentOptions.getText());
+                System.out.println("account index: " + account);
+                System.out.println("account at index" + BooksPage.authors[account]);
+
+                /*for(int i = 0; i < BooksPage.borrowedBooks.length; i++) {
+            
+                    
+                    if (BooksPage.borrowedBooks[i][account] != -1) {
+                        Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[i][account]]);
+                        l.setPadding(new Insets(20, 20, 20, 0));
+                        borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l /*BooksPage.options[ BooksPage.borrowedBooks[i][user] ]*//*, new Separator(Orientation.HORIZONTAL));
+                    }
+                    
+                }*/
+
             });
             FrontPage.logOut.setOnAction(event -> {
                 bp.setTop(null);
                 bp.setCenter(LoginPage.loginBox);
+                borrowedBooksPage.borrowedBooksPage.getChildren().clear();
             });
             FrontPage.books.setOnMouseClicked(event -> {
                 bp.setCenter(BooksPage.booksPage);
+                
             } );
             FrontPage.home.setOnMouseClicked( event -> {
                 bp.setCenter(FrontPage.frontPage);
@@ -306,14 +338,20 @@ public class App extends Application{
                 ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:green; -fx-text-fill: white; -fx-font-weight: bold;");
             });
             ProductPage.checkoutBtn.setOnMouseClicked(event-> {
-                if (BooksPage.copies[selectedBookIndex] > 0) {
-                    BooksPage.addBook(BooksPage.reservedBooks,FrontPage.studentOptions.getText(), BooksPage.titles[selectedBookIndex] );
-                    BooksPage.copies[selectedBookIndex]--;
+                //if (BooksPage.copies[selectedBookIndex] > 0) {
+                    //BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
+                    System.out.println("copies now: "+BooksPage.copies[selectedBookIndex]);
+                    BooksPage.copies[selectedBookIndex] = BooksPage.copies[selectedBookIndex] - 1;
+                    System.out.println("copies later: "+BooksPage.copies[selectedBookIndex]);
                     try  {
                         
                         //Class.forName("com.mysql.cj.jdbc.Driver");
-                        Connection c = DriverManager.getConnection(url, user, pwd);
-                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = '"+BooksPage.copies[selectedBookIndex]+"' WHERE title = '"+ BooksPage.titles[selectedBookIndex]+"';");
+                        Connection c = DriverManager.getConnection(url, user, pwd); 
+                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = ? WHERE title = + ? ;");
+                        //PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = available_copies - 1  WHERE title = 'Dune Messiah';");
+                        
+                        statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
+                        statement.setString(2, BooksPage.titles[selectedBookIndex]);
                         statement.executeUpdate("USE CPP_Library");
 
                         /*statement.executeUpdate("USE CPP_Library");
@@ -327,26 +365,32 @@ public class App extends Application{
                     } catch (Exception e) {
                         System.out.println(e);
                     } 
-                }
+                //}
+                BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
+                
+                int u = BooksPage.findUserIndex(BooksPage.users, FrontPage.studentOptions.getText());
+                
+                Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[selectedBookIndex][u]]);
+                l.setPadding(new Insets(20, 20, 20, 0));
+                borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
 
                 
             });
-<<<<<<< HEAD
-            AccountNotFoundPage.back.setOnMouseEntered(event -> {
-=======
-            AccountNotFoundPagePage.back.setOnMouseEntered(event -> {
->>>>>>> 472d165e85e0c27fc28d59444eaab59cafe66d9f
-                ProductPage.backToLogin.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+            AccountNotFoundPage.backToLogin.setOnMouseEntered(event -> {
+                AccountNotFoundPage.backToLogin.setStyle("-fx-text-fill: blue; -fx-underline: true;");
             });
-            AccountNotFoundPage.back.setOnMouseExited(event -> {
-                ProductPage.backToLogin.setStyle("-fx-text-fill: black; -fx-underline: false;");
+            AccountNotFoundPage.backToLogin.setOnMouseExited(event -> {
+                AccountNotFoundPage.backToLogin.setStyle("-fx-text-fill: black; -fx-underline: false;");
             });
             AccountNotFoundPage.backToLogin.setOnMouseClicked(event -> {
-                bp.setCenter(LoginPage.loginPage);
-                sp.layout();
-                sp.setVvalue(pos+0.00954519909);
+                bp.setCenter(LoginPage.loginBox);
+                
             });
             
+            FrontPage.borrowedBooks.setOnAction(event -> {
+                //borrowedBooksPage.settings(primaryStage);
+                bp.setCenter(borrowedBooksPage.borrowedBooksPage);
+            });
 
             
             
