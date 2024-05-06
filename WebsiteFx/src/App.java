@@ -45,6 +45,7 @@ import pages.FrontPage;
 import pages.StudyRoomsPage;
 import pages.LoginPage;
 import pages.ProductPage;
+import pages.AccountNotFoundPage;
 
 public class App extends Application{
 
@@ -330,7 +331,17 @@ public class App extends Application{
 
                 
             });
-
+            AccountNotFoundPagePage.back.setOnMouseEntered(event -> {
+                ProductPage.back.setStyle("-fx-text-fill: blue; -fx-underline: true;");
+            });
+            AccountNotFoundPagePage.back.setOnMouseExited(event -> {
+                ProductPage.back.setStyle("-fx-text-fill: black; -fx-underline: false;");
+            });
+            AccountNotFoundPagePage.back.setOnMouseClicked(event -> {
+                bp.setCenter(LoginPage.loginPage);
+                sp.layout();
+                sp.setVvalue(pos+0.00954519909);
+            });
             
 
             
