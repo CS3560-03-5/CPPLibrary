@@ -34,7 +34,7 @@ public class FrontPage extends Application {
 
     public static Label studyRooms = new Label("StudyRooms");
 
-    public static HBox middleOptions = new HBox(books, librarian, studyRooms);
+    public static HBox middleOptions = new HBox(books, /*librarian,*/ studyRooms);
 
     public static HBox topOfPane = new HBox(homeBox, middleOptions, studentOptionsBox);
 
@@ -42,7 +42,7 @@ public class FrontPage extends Application {
     public static TextField searchField = new TextField();
     public static HBox search = new HBox(searchPrompt, searchField);
 
-    public static Button libraryChat = new Button("Chat with a Librarian");
+    public static Button libraryChat = new Button("Search");
     public static Button studyRoom = new Button("Reserve a Study Room");
 
     public static VBox frontPage = new VBox(search, libraryChat, studyRoom);
@@ -51,7 +51,7 @@ public class FrontPage extends Application {
     public static void settings(Stage primaryStage) {
 
         searchField.setPromptText("Enter Book or Author");
-        studentOptions.getItems().addAll(borrowedBooks, requests, fees, /*logIn,*/ logOut);
+        studentOptions.getItems().addAll(borrowedBooks, requests, /*fees,*/ /*logIn,*/ logOut);
 
         studentOptionsBox.setPadding(new Insets(0, 0, 0, 200));
 

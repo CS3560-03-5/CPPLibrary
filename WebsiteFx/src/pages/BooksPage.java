@@ -143,7 +143,7 @@ public class BooksPage extends Application {
             ResultSet  resultSet = statement.executeQuery("SELECT * FROM books;");
             int index = 0;
             while(resultSet.next()) {
-                titles[index] = resultSet.getString("title");
+                titles[index] = resultSet.getString("title".trim());
                 authors[index] = resultSet.getString("author");
                 dates[index] = resultSet.getString("publication_date");
                 isbns[index] = resultSet.getString("ISBN");

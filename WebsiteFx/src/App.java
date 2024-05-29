@@ -310,6 +310,11 @@ public class App extends Application{
                     ProductPage.blurb.setText(BooksPage.blurbs[selectedBookIndex/*index*/]);
                     ProductPage.genre.setText(BooksPage.subjects[selectedBookIndex/*index*/]);
                     ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[selectedBookIndex/*index*/]);
+                    System.out.println("copies array: ");
+                    /*for(int c: BooksPage.copies) {System.out.print(c+" ");}
+                    if(BooksPage.copies[selectedBookIndex] == 0) {
+                        ProductPage.checkoutBtn.setText("Request");
+                    }*/
                     pos = sp.getVvalue();
                     System.out.println("Vertical position in the scroll pane: "+pos);
                     bp.setCenter(ProductPage.productPage);
@@ -336,28 +341,36 @@ public class App extends Application{
                 ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:green; -fx-text-fill: white; -fx-font-weight: bold;");
             });
             ProductPage.checkoutBtn.setOnMouseClicked(event-> {
-                //if (BooksPage.copies[selectedBookIndex] > 0) {
-                    //BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
+                if (BooksPage.copies[selectedBookIndex] > 0) {
+                    Label l = new Label(BooksPage.titles[selectedBookIndex]);
+                    l.setPadding(new Insets(20, 20, 20, 0));
+                    borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
+                }
+                
+                if (BooksPage.copies[selectedBookIndex] > 0) {
                     ProductPage.checkoutBtn.setStyle("-fx-background-radius: 20; -fx-background-color:blue; -fx-text-fill: white; -fx-font-weight: bold;");
-                    System.out.println("copies now: "+BooksPage.copies[selectedBookIndex]);
-                    BooksPage.copies[selectedBookIndex] = BooksPage.copies[selectedBookIndex] - 1;
-                    System.out.println("copies later: "+BooksPage.copies[selectedBookIndex]);
+                    
                     try  {    
                         //Class.forName("com.mysql.cj.jdbc.Driver");
+                        System.out.println("copies now: "+BooksPage.copies[selectedBookIndex]);
+                        BooksPage.copies[selectedBookIndex]--;
+                        System.out.println("copies later: "+BooksPage.copies[selectedBookIndex]);
+                        
                         Connection c = DriverManager.getConnection(url, user, pwd); 
-                        PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = ? WHERE title = + ? ;");
-                        //PreparedStatement statement = c.prepareStatement("UPDATE books SET available_copies = available_copies - 1  WHERE title = 'Dune Messiah';");
+                        //PreparedStatement statement = c.prepareStatement("USE CPP_Library; UPDATE books SET available_copies = " + BooksPage.copies[selectedBookIndex] + " WHERE ISBN = '" + BooksPage.isbns[selectedBookIndex].trim() + "';");        
+                        //statement.executeUpdate();
+
+                        PreparedStatement statement = c.prepareStatement("USE CPP_Library; UPDATE books SET available_copies = ? WHERE title = ?");        
+                        statement.setInt(1, BooksPage.copies[selectedBookIndex]);
+                        statement.setString(2, BooksPage.titles[selectedBookIndex].trim()); 
+                        statement.executeUpdate();
                         
-                        statement.setInt(1, BooksPage.copies[selectedBookIndex] - 1); // Decrementing the available_copies
-                        statement.setString(2, BooksPage.titles[selectedBookIndex]);
-                        
-                        
-                }catch (SQLException e) {
+                    }catch (SQLException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
                         System.out.println(e);
                     } 
-                //}
+                }
 
                 BooksPage.addBook(BooksPage.users, BooksPage.borrowedBooks, FrontPage.studentOptions.getText(), selectedBookIndex ); /*BooksPage.titles[selectedBookIndex]*/
                 
@@ -365,10 +378,8 @@ public class App extends Application{
                 
                 System.out.println("borrowing[index]: "+ BooksPage.borrowedBooks[selectedBookIndex][u]);
                 //Label l = new Label(BooksPage.titles[BooksPage.borrowedBooks[selectedBookIndex][u]]);//make everything just selectedBookIndex
-                Label l = new Label(BooksPage.titles[selectedBookIndex]);
-                l.setPadding(new Insets(20, 20, 20, 0));
+            
 
-                borrowedBooksPage.borrowedBooksPage.getChildren().addAll(l , new Separator(Orientation.HORIZONTAL));
                 System.out.println("Borrowed books array: ");
                     for (int row = 0; row < BooksPage.borrowedBooks.length; row++) {
                         for (int col = 0; col < BooksPage.borrowedBooks[0].length; col++) {
@@ -399,6 +410,30 @@ public class App extends Application{
             //set selectedBookIndex equal to the result
             //populate w/ format below
             //bring up product page
+
+            FrontPage.libraryChat.setOnAction(event -> {
+                //selectedBookIndex = BooksPage.findUserIndex(BooksPage.titles, FrontPage.searchField.getText().toLowerCase());
+                for(int i = 0; i < BooksPage.titles.length; i++) {
+            
+                    if(FrontPage.searchField.getText().toLowerCase().compareTo((String) BooksPage.titles[i].toLowerCase()) == 0 ) {
+                        System.out.println(BooksPage.titles[i] + " matches "+ FrontPage.searchField.getText().toLowerCase());
+                        selectedBookIndex = i;
+                    }
+                }
+                ProductPage.productImage.setImage(BooksPage.images[selectedBookIndex]);
+                ProductPage.title.setText(BooksPage.titles[selectedBookIndex]);
+                ProductPage.author.setText(BooksPage.authors[selectedBookIndex]);
+                ProductPage.blurb.setText(BooksPage.blurbs[selectedBookIndex]);
+                ProductPage.genre.setText(BooksPage.subjects[selectedBookIndex]);
+                ProductPage.publishedDate.setText("This Edition Published: " + BooksPage.dates[selectedBookIndex]);
+                System.out.println("copies array: ");
+                /*for(int c: BooksPage.copies) {System.out.print(c+" ");}
+                if(BooksPage.copies[selectedBookIndex]== 0) {
+                    ProductPage.checkoutBtn.setText("Request");
+                }*/
+                bp.setCenter(ProductPage.productPage);
+            });
+            
             
             //ALSO search needs to be a button now(instead of a label), on the right side of the search box, and right next to the bar(no spacing)
             /*

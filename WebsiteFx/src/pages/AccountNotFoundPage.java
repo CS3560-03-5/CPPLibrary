@@ -17,8 +17,8 @@ import javafx.stage.Stage;
 
 public class AccountNotFoundPage {
 	public static VBox messageBox = new VBox();
-	public static Label message = new Label("This account does not exist.");
-	public static Label backToLogin = new Label("< Go back to Log in");
+	public static Label message = new Label("Wrong Username or Password");
+	public static Label backToLogin = new Label("<Go back to Log in");
 
 	public static void settings(Stage primaryStage) {
 		messageBox.getChildren().addAll(message, new Separator(Orientation.HORIZONTAL), backToLogin);
